@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/album1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="AlbumId:"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/album"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="AlbumId" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="Id:"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Id" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/titulo1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="Titulo:"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Titulo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/url1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="URL:"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/url"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:hint="URL" />
+
+        <Button
+            android:id="@+id/btnirUrl"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="Ir"
+            android:onClick="itemclickIrUrl"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/thum1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="thumbnailURL:"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/thum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="thumbnailURL" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

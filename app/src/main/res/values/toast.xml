@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="textoDispo">Disponible</string>
+    <string name="textoNoDispo">No Disponible</string>
+    <string name="IngreceAr">El producto ya existe</string>
+    <string name="IngresoDeDatos">Registro Exitoso</string>
+    <string name="llenarDatos">Debes llenar los campos</string>
+    <string name="NoExiste">No Existe el producto</string>
+    <string name="IngresarCodig">Debes ingresar el código del producto</string>
+    <string name="Eliminado">Se elimino el producto</string>
+
+    <string name="Modificado">El producto se Modifico Corretamente</string>
+
+
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Distribuidora H yJ</string>
+    <string name="txt_1">Ingrese codigo</string>
+    <string name="txt_2">Ingrese descripción</string>
+    <string name="txt_3">Ingrese precio</string>
+    <string name="btnRegistrar">Ingrese producto</string>
+    <string name="btnModificar">Modificar producto</string>
+    <string name="btnBuscar">Buscar producto</string>
+    <string name="btnEliminar">Eliminar producto</string>
+    <string name="btnVer">Listado de Productos</string>
+    <string name="txv">Listado de productos</string>
+    <string name="btn6">Regresar</string>
+    <string name="recycle">recycleId</string>
+    <string name="txtCodigo">Codigo</string>
+    <string name="salir">salir</string>
+    <string name="btnConsumoApi">Consumir API</string>
+
+
+</resources>
