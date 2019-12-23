@@ -1,8 +1,5 @@
 package com.example.distribuidorahyj.Activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,6 +12,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.distribuidorahyj.Interface.IdialogoModificar;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
@@ -163,18 +164,18 @@ public class MainActivity extends AppCompatActivity implements IdialogoModificar
         }
     }
 
-    /*public void modificar(View view) {
+    /*public void modificar() {
 
-        String codigo = et_codigo.getText().toString();
+//        String codigo = et_codigo.getText().toString();
         String descripcion = et_descripcion.getText().toString();
         String precio = et_precio.getText().toString();
 
-        if (!codigo.isEmpty()) {
+        if (!producto.getCodigo().isEmpty()) {
 
             if (!descripcion.isEmpty() && !precio.isEmpty()) {
 
-                modificarProd = new ProductoDAO(this);
-                int cantidad = modificarProd.modificar(productos);
+                productoDAO = new ProductoDAO(this);
+                int cantidad = productoDAO.modificar(producto);
 
                 if (cantidad == 1) {
                     Toast.makeText(this, this.getString(R.string.Modificado), Toast.LENGTH_LONG).show();
@@ -227,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements IdialogoModificar
 
                     //productoDAO = new ProductoDAO(this);
                     productoDAO.modificar(producto);
+            //modificar();
             }
     }
 
