@@ -66,7 +66,7 @@ public class DialogModificarList {
 
         //if (!producto.getCodigo().isEmpty()) {
 
-        //bjkfndkvnjkdasnvjkad
+        //bjkfndkvnjkdasnvjkadhihihoihñisdsf
             if (!producto.getCodigo().isEmpty() && !descripcion.isEmpty() && !precio.isEmpty()) {
 
                 productoDAO = new ProductoDAO(context);
