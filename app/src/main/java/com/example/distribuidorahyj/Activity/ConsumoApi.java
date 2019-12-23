@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.distribuidorahyj.Interface.JsonplaceholderApi;
-import com.example.distribuidorahyj.Interface.ServiceApi;
+import com.example.distribuidorahyj.ServiceApi;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.adaptadores.AdapterPhotos;
 import com.example.distribuidorahyj.domain.Photos;

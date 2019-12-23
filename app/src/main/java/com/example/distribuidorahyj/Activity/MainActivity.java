@@ -23,10 +23,10 @@ import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
-public class MainActivity extends AppCompatActivity implements IdialogoModificar {
+public class MainActivity extends AppCompatActivity implements DialogoModificarMain.IProducto {
 
 
-    private EditText et_codigo, et_descripcion, et_precio, descripcionMain, precioMain;
+    EditText et_codigo, et_descripcion, et_precio, descripcionMain, precioMain;
     private Button eliminar, modificar, btnConsumoApi;
     private Switch Switch;
     private Spinner spinner;
@@ -59,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements IdialogoModificar
             DialogoModificarMain AlertDialog = new DialogoModificarMain(MainActivity.this);
             AlertDialog.modificarDialogo(producto);
         });
+
+        /*eliminar.setOnClickListener(v -> {
+            DialogoModificarMain AlertDialogEliminarProducto = new DialogoModificarMain(MainActivity.this);
+            AlertDialogEliminarProducto.dialogoEliminar(producto);
+        });*/
 
         ArrayAdapter<Producto> adapter = new ArrayAdapter<>(this, R.layout.item_adapter_spinner, R.id.textSpinner, Producto.getProducto("<z"));
         spinner.setAdapter(adapter);
@@ -219,23 +224,16 @@ public class MainActivity extends AppCompatActivity implements IdialogoModificar
         });
     }
 
-    @Override
-    public void modificarDialogo(Producto producto) {
-
-            //String descripcion = descripcionMain.getText().toString();
-            //String precio = precioMain.getText().toString();
-        if (!producto.getCodigo().isEmpty()) {
-
-                    //productoDAO = new ProductoDAO(this);
-                    productoDAO.modificar(producto);
-            //modificar();
-            }
-    }
-
     public void limpiar() {
         et_codigo.setText("");
         et_descripcion.setText("");
         et_precio.setText("");
+    }
+
+    @Override
+    public void modificar(View view,Producto producto) {
+        productoDAO = new ProductoDAO(this);
+        productoDAO.modificar(producto);
     }
 
     /*@Override
@@ -243,4 +241,5 @@ public class MainActivity extends AppCompatActivity implements IdialogoModificar
 
     }*/
 }
+
 

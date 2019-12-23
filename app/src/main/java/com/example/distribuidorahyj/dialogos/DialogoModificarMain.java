@@ -4,13 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-
 import com.example.distribuidorahyj.Activity.MainActivity;
 import com.example.distribuidorahyj.Interface.IdialogoModificar;
 import com.example.distribuidorahyj.R;
+import com.example.distribuidorahyj.adaptadores.AdapterProducto;
+import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.domain.Producto;
 
 public class DialogoModificarMain extends DialogFragment implements IdialogoModificar {
@@ -18,6 +18,8 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
     Context context;
     MainActivity mainActivity = new MainActivity();
     EditText descripcionMain, precioMain;
+    private IProducto mClickListener;
+    private ProductoDAO productoDAO;
 
     public DialogoModificarMain(Context context) {
         this.context = context;
@@ -45,18 +47,24 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
                 .setPositiveButton("MODIFICAR",
                         (dialog, which) -> {
 
-                            mainActivity.modificarDialogo(producto);
+                            //mainActivity.modificarDialogo(producto);
                             //productoDAO.modificar(producto);
                             //productoModificarDialogo.modificarDialogo(producto);
 
                             producto.setDescripcion(descripcionMain.getText().toString());
                             producto.setPrecio(Integer.parseInt(precioMain.getText().toString()));
 
-                            dismiss();
+                            productoDAO = new ProductoDAO(context);
+                            productoDAO.modificar(producto);
+
+
                         })
                 .setNegativeButton("CANCELAR",
                         (dialog, which) -> dialog.cancel());
         builder.show();
     }
+
+    public interface IProducto{
+        void modificar(View view,Producto producto);
+    }
 }
-//asfasgdfgdfaaaa
