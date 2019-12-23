@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+
 import androidx.appcompat.app.AlertDialog;
+
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.adaptadores.AdapterProducto;
 import com.example.distribuidorahyj.dao.ProductoDAO;
@@ -62,7 +64,7 @@ public class DialogModificarList {
         String descripcion = descripciones.getText().toString();
         String precio = precios.getText().toString();
 
-        if (!producto.getCodigo().isEmpty()) {
+        //if (!producto.getCodigo().isEmpty()) {
 
             if (!producto.getCodigo().isEmpty() && !descripcion.isEmpty() && !precio.isEmpty()) {
 
@@ -70,6 +72,6 @@ public class DialogModificarList {
                 productoDAO.modificar(producto);
 
             }
-        }
+        //}
     }
 }
