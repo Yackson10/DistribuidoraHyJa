@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
     }
 
     @Override
-    public void modificar(View view,Producto producto) {
+    public void modificar(View view, Producto producto) {
         productoDAO = new ProductoDAO(this);
         productoDAO.modificar(producto);
     }

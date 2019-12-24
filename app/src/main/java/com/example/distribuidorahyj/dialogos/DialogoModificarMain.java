@@ -51,13 +51,13 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
                             //productoDAO.modificar(producto);
                             //productoModificarDialogo.modificarDialogo(producto);
 
-                            producto.setDescripcion(descripcionMain.getText().toString());
-                            producto.setPrecio(Integer.parseInt(precioMain.getText().toString()));
+
 
                             productoDAO = new ProductoDAO(context);
                             productoDAO.modificar(producto);
 
-
+                            producto.setDescripcion(descripcionMain.getText().toString());
+                            producto.setPrecio(Integer.parseInt(precioMain.getText().toString()));
                         })
                 .setNegativeButton("CANCELAR",
                         (dialog, which) -> dialog.cancel());
