@@ -9,8 +9,6 @@ import androidx.fragment.app.DialogFragment;
 import com.example.distribuidorahyj.Activity.MainActivity;
 import com.example.distribuidorahyj.Interface.IdialogoModificar;
 import com.example.distribuidorahyj.R;
-import com.example.distribuidorahyj.adaptadores.AdapterProducto;
-import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.domain.Producto;
 
 public class DialogoModificarMain extends DialogFragment implements IdialogoModificar {
@@ -18,12 +16,42 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
     Context context;
     MainActivity mainActivity = new MainActivity();
     EditText descripcionMain, precioMain;
-    private IProducto mClickListener;
-    private ProductoDAO productoDAO;
+    //ProductoDAO productoDAO;
+
 
     public DialogoModificarMain(Context context) {
         this.context = context;
     }
+
+    /*public void alertDialog(Producto producto) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View view = inflater.inflate(R.layout.dialogo_modificar_main,null);
+
+        builder.setView(view);
+
+        //descripcionMain =view.findViewById(R.id.dialogoAgregarDescripcionMain);
+        //precioMain = view.findViewById(R.id.dialogoAgregarPrecioMain);
+
+        //descripcionMain.setText(producto.getDescripcion());
+        //precioMain.setText(String.valueOf(producto.getPrecio()));
+
+        builder.setTitle("Desea Modificar el Producto ")
+
+                .setPositiveButton("MODIFICAR",
+                        (dialog, which) -> {
+                            //alert = IAlertDialog
+                            alert.modificarDialogo(producto);
+
+                            dismiss();
+                        })
+                .setNegativeButton("CANCELAR",
+                        (dialog, which) -> dialog.cancel());
+        builder.show();
+    }*/
 
     @Override
     public void modificarDialogo(Producto producto) {
@@ -47,24 +75,28 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
                 .setPositiveButton("MODIFICAR",
                         (dialog, which) -> {
 
-                            //mainActivity.modificarDialogo(producto);
-                            //productoDAO.modificar(producto);
+
+                            mainActivity.modificarDialogo(producto);
+
                             //productoModificarDialogo.modificarDialogo(producto);
-
-
-
-                            productoDAO = new ProductoDAO(context);
-                            productoDAO.modificar(producto);
 
                             producto.setDescripcion(descripcionMain.getText().toString());
                             producto.setPrecio(Integer.parseInt(precioMain.getText().toString()));
+
+                            //dismiss();
                         })
                 .setNegativeButton("CANCELAR",
                         (dialog, which) -> dialog.cancel());
         builder.show();
     }
 
-    public interface IProducto{
-        void modificar(View view,Producto producto);
-    }
+
+
 }
+
+
+
+
+
+
+

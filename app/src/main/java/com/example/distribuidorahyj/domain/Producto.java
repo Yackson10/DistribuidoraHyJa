@@ -57,7 +57,7 @@ public class  Producto {
 
     public static ArrayList<Producto> getProducto(String string){
         ArrayList<Producto> productos = new ArrayList<>();
-        productos.add(new Producto(0,"Seleccione", 1000, true));
+        productos.add(new Producto(0,"Disponible", 1000, true));
         productos.add(new Producto(1,"Lateos", 12000, true));
         productos.add(new Producto(2,"Carnes", 15000, true));
         productos.add(new Producto(3,"Frios", 16000, true));

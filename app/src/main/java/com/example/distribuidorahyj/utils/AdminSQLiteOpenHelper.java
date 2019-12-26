@@ -15,17 +15,22 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase baseDeDatos) {
-        baseDeDatos.execSQL(Tabla_Producto.CREAR_TABLA_ARTICULOS);
         //baseDeDatos.execSQL("create table articulos(codigo int primary key, descripcion text, precio real, disponible boolean)");
-        baseDeDatos.execSQL("create table cliente(id int primary key)");
+        baseDeDatos.execSQL("create table cliente(id int primary key )");
         //baseDeDatos.execSQL("create table photos(albumId int primary key, id int, title text, url text, thumbnailUrl text)");
         baseDeDatos.execSQL(Tabla_Photos.CREAR_TABLA_PHOTOS);
+        baseDeDatos.execSQL(Tabla_Producto.CREAR_TABLA_PRODUCTO);
+        baseDeDatos.execSQL(Tabla_Sede.CREAR_TABLA_SEDE);
+        baseDeDatos.execSQL(Tabla_ProductoXSede.CREAR_TABLA_PRODUCTOXSEDE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase baseDeDatos, int i, int i1) {
-        baseDeDatos.execSQL("DROP TABLE IF EXISTS articulos");
         baseDeDatos.execSQL("DROP TABLE IF EXISTS photos");
+        baseDeDatos.execSQL("DROP TABLE IF EXISTS producto");
+        baseDeDatos.execSQL("DROP TABLE IF EXISTS sede");
+        baseDeDatos.execSQL("DROP TABLE IF EXISTS productoXSede");
+
         onCreate(baseDeDatos);
     }
 

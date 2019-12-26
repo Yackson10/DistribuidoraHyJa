@@ -13,7 +13,7 @@ import com.example.distribuidorahyj.domain.Producto;
 
 public class DialogModificarList {
 
-    EditText descripciones, precios;
+    private EditText descripciones, precios;
     AdapterProducto adapter;
     ProductoDAO productoDAO;
     Context context;
@@ -57,10 +57,12 @@ public class DialogModificarList {
         dialogo.show();
     }
 
-    private void modificar(Producto producto) {
+    public void modificar(Producto producto) {
 
         String descripcion = descripciones.getText().toString();
         String precio = precios.getText().toString();
+
+        if (!producto.getCodigo().isEmpty()) {
 
             if (!producto.getCodigo().isEmpty() && !descripcion.isEmpty() && !precio.isEmpty()) {
 
@@ -68,6 +70,6 @@ public class DialogModificarList {
                 productoDAO.modificar(producto);
 
             }
+        }
     }
-
 }

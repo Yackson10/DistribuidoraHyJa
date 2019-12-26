@@ -1,13 +1,11 @@
-package com.example.distribuidorahyj;
-
-import com.example.distribuidorahyj.Interface.JsonplaceholderApi;
+package com.example.distribuidorahyj.Interface;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceApi {
 
-    private static JsonplaceholderApi retrofit;
+    private static JsonplaceholderApi  retrofit;
 
     public static  JsonplaceholderApi getRetrofit() {
 

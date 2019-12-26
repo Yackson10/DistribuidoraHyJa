@@ -50,8 +50,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/txt_3"
             android:inputType="numberDecimal"
-            android:maxLength="15"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <Switch
             android:id="@+id/switch1"
@@ -60,12 +59,12 @@
             android:showText="true"
             android:text="Disponible"
             android:textOff="Si"
-            android:textOn="No" />
+            android:textOn="No"/>
 
         <Spinner
             android:id="@+id/idSpinner"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

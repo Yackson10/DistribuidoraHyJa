@@ -1,5 +1,8 @@
 package com.example.distribuidorahyj.Activity;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,24 +11,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.distribuidorahyj.Interface.IdialogoModificar;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
-public class MainActivity extends AppCompatActivity implements DialogoModificarMain.IProducto {
+public class MainActivity extends AppCompatActivity implements IdialogoModificar {
 
 
-    EditText et_codigo, et_descripcion, et_precio, descripcionMain, precioMain;
+    private EditText et_codigo, et_descripcion, et_precio, descripcionMain, precioMain;
     private Button eliminar, modificar, btnConsumoApi;
-    private Switch Switch;
+    private Switch disponible;
     private Spinner spinner;
     ProductoDAO productoDAO;
     Producto producto;
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         et_descripcion = findViewById(R.id.descripcion);
         et_precio = findViewById(R.id.precio);
 
-        Switch = findViewById(R.id.switch1);
+        disponible = findViewById(R.id.switch1);
         spinner = findViewById(R.id.idSpinner);
         eliminar = findViewById(R.id.btnEliminar);
         modificar = findViewById(R.id.btnModificar);
@@ -57,21 +60,22 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
             AlertDialog.modificarDialogo(producto);
         });
 
-        /*eliminar.setOnClickListener(v -> {
-            DialogoModificarMain AlertDialogEliminarProducto = new DialogoModificarMain(MainActivity.this);
-            AlertDialogEliminarProducto.dialogoEliminar(producto);
-        });*/
-
         ArrayAdapter<Producto> adapter = new ArrayAdapter<>(this, R.layout.item_adapter_spinner, R.id.textSpinner, Producto.getProducto("<z"));
         spinner.setAdapter(adapter);
 
-        Switch.setOnCheckedChangeListener((compoundButton, b) -> {
+        disponible.setChecked(false);
+        disponible.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
-            if (b)
-                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.textoNoDispo), Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.textoDispo), Toast.LENGTH_SHORT).show();
+                if (isChecked)
+                    Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoNoDispo), Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoDispo), Toast.LENGTH_SHORT).show();
+            }
         });
+
+
     }
 
     public SQLiteDatabase Conexion() {
@@ -109,10 +113,11 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
 
                 Toast.makeText(this, this.getString(R.string.IngresoDeDatos), Toast.LENGTH_SHORT).show();
             }
-            limpiar();
+
         } else {
             Toast.makeText(this, this.getString(R.string.llenarDatos), Toast.LENGTH_SHORT).show();
         }
+        limpiar();
     }
 
     //Metodo para Buscar Articulos o productos
@@ -166,18 +171,18 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         }
     }
 
-    /*public void modificar() {
+    /*public void modificar(View view) {
 
-//        String codigo = et_codigo.getText().toString();
+        String codigo = et_codigo.getText().toString();
         String descripcion = et_descripcion.getText().toString();
         String precio = et_precio.getText().toString();
 
-        if (!producto.getCodigo().isEmpty()) {
+        if (!codigo.isEmpty()) {
 
             if (!descripcion.isEmpty() && !precio.isEmpty()) {
 
-                productoDAO = new ProductoDAO(this);
-                int cantidad = productoDAO.modificar(producto);
+                modificarProd = new ProductoDAO(this);
+                int cantidad = modificarProd.modificar(productos);
 
                 if (cantidad == 1) {
                     Toast.makeText(this, this.getString(R.string.Modificado), Toast.LENGTH_LONG).show();
@@ -221,16 +226,22 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         });
     }
 
+    @Override
+    public void modificarDialogo(Producto producto) {
+
+            //String descripcion = descripcionMain.getText().toString();
+            //String precio = precioMain.getText().toString();
+        if (!producto.getCodigo().isEmpty()) {
+
+                    //productoDAO = new ProductoDAO(this);
+                    productoDAO.modificar(producto);
+            }
+    }
+
     public void limpiar() {
         et_codigo.setText("");
         et_descripcion.setText("");
         et_precio.setText("");
-    }
-
-    @Override
-    public void modificar(View view, Producto producto) {
-        productoDAO = new ProductoDAO(this);
-        productoDAO.modificar(producto);
     }
 
     /*@Override
@@ -238,5 +249,4 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
 
     }*/
 }
-
 

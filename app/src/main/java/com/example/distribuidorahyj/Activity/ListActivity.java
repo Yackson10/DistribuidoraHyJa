@@ -58,9 +58,7 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
 
         SQLiteDatabase oConexion = Conexion();
 
-        Cursor fila = oConexion.rawQuery
-
-                ("select codigo,descripcion,precio from articulos", null);
+        Cursor fila = oConexion.rawQuery("select codigo,descripcion,precio from articulos", null);
 
         for (fila.moveToFirst(); !fila.isAfterLast(); fila.moveToNext()) {
 
