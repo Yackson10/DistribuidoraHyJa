@@ -12,11 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.distribuidorahyj.Interface.IdialogoModificar;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
