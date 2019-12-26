@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.distribuidorahyj.Activity.MainActivity;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
@@ -30,6 +31,7 @@ public class ProductoDAO {
         registro.put("precio", producto.getPrecio());
 
         return baseDeDatos.update("articulos", registro, "codigo=" + producto.getCodigo(), null);
+
     }
 
     public Producto buscar(String codigo) {
