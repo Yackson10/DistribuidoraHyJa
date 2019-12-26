@@ -22,6 +22,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
         baseDeDatos.execSQL(Tabla_Producto.CREAR_TABLA_PRODUCTO);
         baseDeDatos.execSQL(Tabla_Sede.CREAR_TABLA_SEDE);
         baseDeDatos.execSQL(Tabla_ProductoXSede.CREAR_TABLA_PRODUCTOXSEDE);
+        //GGHGgit status
     }
 
     @Override
