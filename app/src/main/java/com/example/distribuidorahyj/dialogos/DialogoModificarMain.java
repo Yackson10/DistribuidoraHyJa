@@ -46,7 +46,7 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
                         (dialog, which) -> {
 
 
-                            //mainActivity.modificarDialogo(producto);
+                            //dddmainActivity.modificarDialogo(producto);
 
                             producto.setDescripcion(descripcionMain.getText().toString());
                             producto.setPrecio(Integer.parseInt(precioMain.getText().toString()));
