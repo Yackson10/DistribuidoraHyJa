@@ -35,7 +35,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
     }
 
 
-}//dfgds
+}
 
 
 

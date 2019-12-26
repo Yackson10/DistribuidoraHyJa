@@ -16,14 +16,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
-import com.example.distribuidorahyj.Interface.IdialogoModificar;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
-public class MainActivity extends AppCompatActivity implements IdialogoModificar {
+public class MainActivity extends AppCompatActivity implements DialogoModificarMain.IProducto{
 
 
     private EditText et_codigo, et_descripcion, et_precio, descripcionMain, precioMain;
@@ -151,8 +150,6 @@ public class MainActivity extends AppCompatActivity implements IdialogoModificar
 
     public void eliminar(Producto producto) {
 
-        //String codigo = et_codigo.getText().toString();
-
         if (!producto.getCodigo().isEmpty()) {
 
             productoDAO = new ProductoDAO(this);
@@ -226,22 +223,17 @@ public class MainActivity extends AppCompatActivity implements IdialogoModificar
         });
     }
 
-    @Override
-    public void modificarDialogo(Producto producto) {
-
-            //String descripcion = descripcionMain.getText().toString();
-            //String precio = precioMain.getText().toString();
-        if (!producto.getCodigo().isEmpty()) {
-
-                    //productoDAO = new ProductoDAO(this);
-                    productoDAO.modificar(producto);
-            }
-    }
 
     public void limpiar() {
         et_codigo.setText("");
         et_descripcion.setText("");
         et_precio.setText("");
+    }
+
+    @Override
+    public void modificar(View view,Producto producto) {
+        productoDAO = new ProductoDAO(this);
+        productoDAO.modificar(producto);
     }
 
     /*@Override
