@@ -1,5 +1,8 @@
 package com.example.distribuidorahyj.Activity;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,10 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
@@ -232,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
     }
 
     @Override
-    public void modificar(View view, Producto producto) {
+    public void modificar(View view,Producto producto) {
         productoDAO = new ProductoDAO(this);
         productoDAO.modificar(producto);
     }

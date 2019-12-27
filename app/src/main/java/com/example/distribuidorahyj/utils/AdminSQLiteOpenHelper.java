@@ -1,6 +1,7 @@
 package com.example.distribuidorahyj.utils;
 
 import android.content.Context;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -18,10 +19,9 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
         baseDeDatos.execSQL("create table cliente(id int primary key )");
         //baseDeDatos.execSQL("create table photos(albumId int primary key, id int, title text, url text, thumbnailUrl text)");
         baseDeDatos.execSQL(Tabla_Photos.CREAR_TABLA_PHOTOS);
-        baseDeDatos.execSQL(Tabla_Producto.CREAR_TABLA_PRODUCTO);
+        baseDeDatos.execSQL(Tabla_Producto.CREAR_TABLA_ARTICULOS);
         baseDeDatos.execSQL(Tabla_Sede.CREAR_TABLA_SEDE);
         baseDeDatos.execSQL(Tabla_ProductoXSede.CREAR_TABLA_PRODUCTOXSEDE);
-        //GGHGgit status
     }
 
     @Override

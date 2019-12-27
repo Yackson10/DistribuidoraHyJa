@@ -4,10 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-
 import com.example.distribuidorahyj.Activity.MainActivity;
 import com.example.distribuidorahyj.Interface.IdialogoModificar;
 import com.example.distribuidorahyj.R;
@@ -25,7 +23,6 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
     public DialogoModificarMain(Context context) {
         this.context = context;
     }
-
     @Override
     public void modificarDialogo(Producto producto) {
 
@@ -48,27 +45,25 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
                 .setPositiveButton("MODIFICAR",
                         (dialog, which) -> {
 
+
+                            //dddmainActivity.modificarDialogo(producto);
+
                             producto.setDescripcion(descripcionMain.getText().toString());
                             producto.setPrecio(Integer.parseInt(precioMain.getText().toString()));
 
                             productoDAO = new ProductoDAO(context);
                             productoDAO.modificar(producto);
 
+
                         })
                 .setNegativeButton("CANCELAR",
-
                         (dialog, which) -> dialog.cancel());
-
         builder.show();
     }
 
-    public interface IProducto {
-        void modificar(View view, Producto producto);
+    public interface IProducto{
+        void modificar(View view,Producto producto);
     }
-
-
-
-
 }
 
 

@@ -1,26 +1,23 @@
 package com.example.distribuidorahyj.Activity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.View;
+import java.util.ArrayList;
+import android.database.Cursor;
+import android.widget.Toast;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.adaptadores.AdapterProducto;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogModificarList;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
-
-import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity implements AdapterProducto.onItemClick, AdapterProducto.onItemClicks {
 
@@ -61,7 +58,9 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
 
         SQLiteDatabase oConexion = Conexion();
 
-        Cursor fila = oConexion.rawQuery("select codigo,descripcion,precio from articulos", null);
+        Cursor fila = oConexion.rawQuery
+
+                ("select codigo,descripcion,precio from articulos", null);
 
         for (fila.moveToFirst(); !fila.isAfterLast(); fila.moveToNext()) {
 
