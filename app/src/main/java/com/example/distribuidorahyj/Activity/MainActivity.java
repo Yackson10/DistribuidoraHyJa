@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
@@ -125,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         } else {
             Toast.makeText(this, this.getString(R.string.llenarDatos), Toast.LENGTH_SHORT).show();
         }
-        //
     }
 
     //Metodo para Buscar Articulos o productos
