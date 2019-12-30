@@ -19,4 +19,15 @@
         android:hint="Precio"
         android:inputType="number"/>
 
+    <Switch
+        android:id="@+id/switchDialogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disponible"/>
+
+    <Spinner
+        android:id="@+id/idSpinnerDialogo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

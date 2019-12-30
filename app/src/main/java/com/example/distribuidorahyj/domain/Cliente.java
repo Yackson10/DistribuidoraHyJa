@@ -1,6 +1,8 @@
 package com.example.distribuidorahyj.domain;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable {
 
     String nombre;
     String apellido;

@@ -35,8 +35,9 @@ public class DialogoSedesPorProducto {
 
 
                         })
-                .setNegativeButton("CANCELAR",
+                .setNegativeButton("GUARDAR",
                         (dialog, which) -> dialog.cancel());
+
         builder.show();
     }
 }

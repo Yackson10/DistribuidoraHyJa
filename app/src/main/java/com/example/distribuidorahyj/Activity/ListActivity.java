@@ -49,7 +49,7 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
 
     public SQLiteDatabase Conexion() {
 
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "BaseDeDatosDistri", null, 1);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
         return BaseDeDatos;
     }

@@ -1,6 +1,8 @@
 package com.example.distribuidorahyj.domain;
 
-public class Photos {
+import java.io.Serializable;
+
+public class Photos implements Serializable {
 
     private int albumId;
     private int id;

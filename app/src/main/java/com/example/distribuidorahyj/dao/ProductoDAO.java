@@ -15,7 +15,7 @@ public class ProductoDAO {
     MainActivity m;
 
     public ProductoDAO(Context context) {
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context, "administracion", null, 1);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context, "BaseDeDatosDistri", null, 1);
         baseDeDatos = admin.getWritableDatabase();
     }
 

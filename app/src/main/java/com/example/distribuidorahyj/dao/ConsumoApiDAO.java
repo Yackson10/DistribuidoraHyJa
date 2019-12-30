@@ -12,7 +12,7 @@ public class ConsumoApiDAO {
     SQLiteDatabase baseDeDatos;
 
     public ConsumoApiDAO (Context contexto){
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(contexto,"administracion", null, 1);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(contexto,"BaseDeDatosDistri", null, 1);
         baseDeDatos = admin.getWritableDatabase();
     }
 

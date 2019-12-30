@@ -9,6 +9,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -19,18 +21,19 @@ import android.widget.Toast;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
+import com.example.distribuidorahyj.dialogos.DialogoSedesPorProducto;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
-public class MainActivity extends AppCompatActivity implements DialogoModificarMain.IProducto {
-
+public class MainActivity extends AppCompatActivity implements DialogoModificarMain.IProducto{
 
     private EditText et_codigo, et_descripcion, et_precio, descripcionMain, precioMain;
-    private Button eliminar, modificar, btnConsumoApi, btnRegistrar;
+    private Button eliminar, modificar, btnConsumoApi, btnIngreseSede;
     private Switch disponible;
     private Spinner spinner;
     ProductoDAO productoDAO;
     Producto producto;
+    String[] TipoPrecios={"Lateos", "Carnes", "Frios", "Liquidos"};
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +50,24 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         descripcionMain = findViewById(R.id.dialogoAgregarDescripcionMain);
         precioMain = findViewById(R.id.dialogoAgregarPrecioMain);
         btnConsumoApi = findViewById(R.id.btnConsumoApi);
-        btnRegistrar = findViewById(R.id.btnRegistrar);
+        btnIngreseSede = findViewById(R.id.btnSede);
+
+
+
+        ArrayAdapter<Producto> adapter = new ArrayAdapter<>(this, R.layout.item_adapter_spinner, R.id.textSpinner, Producto.getProducto("<z"));
+        spinner.setAdapter(adapter);
+
+        /*spinner.setOnItemClickListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });*/
 
         dialogoEliminar();
 
@@ -56,33 +76,35 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
             startActivity(consumoApi);
         });
 
-        modificar.setOnClickListener(v -> {
-            DialogoModificarMain AlertDialog = new DialogoModificarMain(MainActivity.this);
-            AlertDialog.modificarDialogo(producto);
+        btnIngreseSede.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogoSedesPorProducto dialogoSedesPorProducto = new DialogoSedesPorProducto(MainActivity.this);
+                dialogoSedesPorProducto.DialogoSedes(producto);
+            }
         });
 
-
-
-        ArrayAdapter<Producto> adapter = new ArrayAdapter<>(this, R.layout.item_adapter_spinner, R.id.textSpinner, Producto.getProducto("<z"));
-        spinner.setAdapter(adapter);
-
+        modificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogoModificarMain AlertDialog = new DialogoModificarMain(MainActivity.this);
+                AlertDialog.modificarDialogo(producto);
+            }
+        });
 
         disponible.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-
                 if (isChecked)
                     Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoDispo), Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoNoDispo), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-
     public SQLiteDatabase Conexion() {
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "BaseDeDatosDistri", null, 1);
         SQLiteDatabase BaseDeDatos = admin.getWritableDatabase();
         return BaseDeDatos;
     }
@@ -119,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
                 Toast.makeText(this, this.getString(R.string.IngresoDeDatos), Toast.LENGTH_SHORT).show();
                 limpiar();
             }
-
         } else {
             Toast.makeText(this, this.getString(R.string.llenarDatos), Toast.LENGTH_SHORT).show();
         }

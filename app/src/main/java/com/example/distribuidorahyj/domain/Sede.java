@@ -1,8 +1,9 @@
 package com.example.distribuidorahyj.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Sede {
+public class Sede implements Serializable {
 
     int codigo;
     String nombre;
@@ -40,7 +41,7 @@ public class Sede {
 
     public static ArrayList<Sede> getSede(String string){
         ArrayList<Sede> sede = new ArrayList<>();
-        // sede.add(new Producto());
+        //sede.add(new Producto());
         //sede.add(new Producto(0,"Lateos", "12000", true));
         //sede.add(new Producto(1,"Carnes", "15000", true));
         //sede.add(new Producto(2,"Frios", "16000", true));

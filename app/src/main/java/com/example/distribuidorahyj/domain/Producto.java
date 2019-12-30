@@ -1,8 +1,8 @@
 package com.example.distribuidorahyj.domain;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class  Producto {
+public class  Producto implements Serializable {
 
     private int codigo;
     private String descripcion;

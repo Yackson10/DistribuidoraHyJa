@@ -50,13 +50,17 @@
             android:layout_height="wrap_content"
             android:hint="@string/txt_3"
             android:textSize="14sp"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:maxLength="11"/>
 
         <Switch
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Disponible" />
+            android:checked="false"
+            android:text="Disponible"
+            android:textOn="No disponible"
+            android:textOff="Disponible"/>
 
         <Spinner
             android:id="@+id/idSpinner"
@@ -64,7 +68,6 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -117,6 +120,12 @@
                 android:text="@string/btnConsumoApi"
                 android:textSize="14sp" />
 
+            <Button
+                android:id="@+id/btnSede"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingrese Sede"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

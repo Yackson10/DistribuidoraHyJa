@@ -14,7 +14,6 @@ import com.example.distribuidorahyj.domain.Producto;
 public class DialogoModificarMain extends DialogFragment implements IdialogoModificar {
 
     Context context;
-    //MainActivity mainActivity = new MainActivity();
     EditText descripcionMain, precioMain;
     IProducto mClickListener;
     ProductoDAO productoDAO;

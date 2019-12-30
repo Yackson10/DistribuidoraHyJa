@@ -15,7 +15,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase baseDeDatos) {
         //baseDeDatos.execSQL("create table sede(codigo int primary key, nombre text, Departamento text)");
-        baseDeDatos.execSQL("create table cliente(id int primary key )");
+        baseDeDatos.execSQL("create table cliente(id int primary key)");
         //baseDeDatos.execSQL("create table s(albumId int primary key, id int, title text, url text, thumbnailUrl text)");
         baseDeDatos.execSQL(Tabla_Photos.CREAR_TABLA_PHOTOS);
         baseDeDatos.execSQL(Tabla_Producto.CREAR_TABLA_ARTICULOS);
