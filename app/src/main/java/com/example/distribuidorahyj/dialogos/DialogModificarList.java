@@ -46,7 +46,7 @@ public class DialogModificarList {
                             modificar(producto);
 
                             producto.setDescripcion(descripciones.getText().toString());
-                            producto.setPrecio(Integer.parseInt(precios.getText().toString()));
+                            producto.setPrecio(precios.getText().toString());
 
                             adapter.listDatos.set(pos, producto);
                             adapter.notifyItemChanged(pos);

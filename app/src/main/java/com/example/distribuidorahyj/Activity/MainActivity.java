@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
+
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
 
 
     private EditText et_codigo, et_descripcion, et_precio, descripcionMain, precioMain;
-    private Button eliminar, modificar, btnConsumoApi;
+    private Button eliminar, modificar, btnConsumoApi, btnRegistrar;
     private Switch disponible;
     private Spinner spinner;
     ProductoDAO productoDAO;
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         descripcionMain = findViewById(R.id.dialogoAgregarDescripcionMain);
         precioMain = findViewById(R.id.dialogoAgregarPrecioMain);
         btnConsumoApi = findViewById(R.id.btnConsumoApi);
+        btnRegistrar = findViewById(R.id.btnRegistrar);
+
         dialogoEliminar();
 
         btnConsumoApi.setOnClickListener(v -> {
@@ -59,23 +63,25 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
             AlertDialog.modificarDialogo(producto);
         });
 
+
+
         ArrayAdapter<Producto> adapter = new ArrayAdapter<>(this, R.layout.item_adapter_spinner, R.id.textSpinner, Producto.getProducto("<z"));
         spinner.setAdapter(adapter);
 
-        disponible.setChecked(false);
+
         disponible.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
                 if (isChecked)
-                    Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoNoDispo), Toast.LENGTH_SHORT).show();
-                else
                     Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoDispo), Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoNoDispo), Toast.LENGTH_SHORT).show();
             }
         });
 
-
     }
+
 
     public SQLiteDatabase Conexion() {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
@@ -91,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         String codigo = et_codigo.getText().toString();
         String descripcion = et_descripcion.getText().toString();
         String precio = et_precio.getText().toString();
+        boolean dispo = true;
 
         if (!codigo.isEmpty() && !descripcion.isEmpty() && !precio.isEmpty()) {
 
@@ -100,23 +107,25 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
                     ("select descripcion, precio from articulos where codigo =" + codigo, null);
 
             if (fila.moveToFirst()) {
-                Toast.makeText(this, this.getString(R.string.IngreceAr), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, this.getString(R.string.canbia), Toast.LENGTH_SHORT).show();
                 oConexion.close();
             } else {
                 ContentValues registro = new ContentValues();
                 registro.put("codigo", codigo);
                 registro.put("descripcion", descripcion);
                 registro.put("precio", precio);
+                registro.put("disponible", dispo);
 
                 oConexion.insert("articulos", null, registro);
 
                 Toast.makeText(this, this.getString(R.string.IngresoDeDatos), Toast.LENGTH_SHORT).show();
+                limpiar();
             }
 
         } else {
             Toast.makeText(this, this.getString(R.string.llenarDatos), Toast.LENGTH_SHORT).show();
         }
-        limpiar();
+        //
     }
 
     //Metodo para Buscar Articulos o productos
@@ -223,7 +232,6 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         });
     }
 
-
     public void limpiar() {
         et_codigo.setText("");
         et_descripcion.setText("");
@@ -231,14 +239,10 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
     }
 
     @Override
-    public void modificar(View view,Producto producto) {
+    public void modificar(View view, Producto producto) {
         productoDAO = new ProductoDAO(this);
         productoDAO.modificar(producto);
     }
 
-    /*@Override
-    public void alertDialog(Producto producto) {
-
-    }*/
 }
 

@@ -7,7 +7,8 @@ public class Tabla_Producto {
     public static final String CAMPO_DESCRIPCION="descripcion";
     public static final String CAMPO_PRECIO="precio";
     public static final String CAMPO_DISPONIBLE="disponible";
+    public static final String CAMPO_TIPOPRODUCTO="tipoProducto";
 
 
-    public static final String CREAR_TABLA_ARTICULOS="CREATE TABLE "+ TABLA_ARTICULOS+" ("+CAMPO_CODIGO+" INTEGER primary key, "+CAMPO_DESCRIPCION+" TEXT, "+CAMPO_PRECIO+" INTEGER, "+CAMPO_DISPONIBLE+" BOOLEAN)";
+    public static final String CREAR_TABLA_ARTICULOS="CREATE TABLE "+ TABLA_ARTICULOS+" ("+CAMPO_CODIGO+" INTEGER primary key, "+CAMPO_DESCRIPCION+" TEXT," + CAMPO_PRECIO+" TEXT, "+CAMPO_DISPONIBLE+" BOOLEAN, "+CAMPO_TIPOPRODUCTO+" TEXT)";
 }

@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.distribuidorahyj.Interface.JsonplaceholderApi;
-import com.example.distribuidorahyj.Interface.ServiceApi;
+import com.example.distribuidorahyj.ServiceApi;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.domain.Photos;
 import com.example.distribuidorahyj.adaptadores.AdapterPhotos;
@@ -75,6 +75,7 @@ public class ConsumoApi extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Photos>> call, Throwable t) {
+
             }
         });
     }
@@ -95,6 +96,7 @@ public class ConsumoApi extends AppCompatActivity {
 
                     listPhotosfilter = new ArrayList<>();
                     listPhotosfilter.add(photo);
+
 
                     adapter.setItems(listPhotosfilter);
 

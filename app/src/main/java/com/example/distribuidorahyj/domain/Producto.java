@@ -6,13 +6,13 @@ public class  Producto {
 
     private int codigo;
     private String descripcion;
-    private int precio;
+    private String precio;
     private boolean disponible;
 
     public Producto() {
     }
 
-    public Producto(int codigo, String descripcion, int precio, boolean disponible) {
+    public Producto(int codigo, String descripcion, String precio, boolean disponible) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -43,11 +43,11 @@ public class  Producto {
         this.descripcion = descripcion;
     }
 
-    public int getPrecio() {
+    public String getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(String precio) {
 
         this.precio = precio;
     }
@@ -57,11 +57,11 @@ public class  Producto {
 
     public static ArrayList<Producto> getProducto(String string){
         ArrayList<Producto> productos = new ArrayList<>();
-        productos.add(new Producto(0,"Disponible", 1000, true));
-        productos.add(new Producto(1,"Lateos", 12000, true));
-        productos.add(new Producto(2,"Carnes", 15000, true));
-        productos.add(new Producto(3,"Frios", 16000, true));
-        productos.add(new Producto(4,"Liquidos", 18000, true));
+        productos.add(new Producto(-1,"Tipo de Producto", "1000", true));
+        productos.add(new Producto(0,"Lateos", "12000", true));
+        productos.add(new Producto(1,"Carnes", "15000", true));
+        productos.add(new Producto(2,"Frios", "16000", true));
+        productos.add(new Producto(3,"Liquidos", "18000", true));
         return productos;
 
     }

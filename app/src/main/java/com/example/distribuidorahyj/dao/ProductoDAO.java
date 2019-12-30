@@ -5,12 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.distribuidorahyj.Activity.MainActivity;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
 public class ProductoDAO {
 
     SQLiteDatabase baseDeDatos;
+    MainActivity m;
 
     public ProductoDAO(Context context) {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(context, "administracion", null, 1);
@@ -30,6 +32,7 @@ public class ProductoDAO {
         registro.put("precio", producto.getPrecio());
 
         return baseDeDatos.update("articulos", registro, "codigo=" + producto.getCodigo(), null);
+
     }
 
     public Producto buscar(String codigo) {
@@ -43,7 +46,7 @@ public class ProductoDAO {
             producto = new Producto();
             producto.setCodigo(Integer.parseInt(codigo));
             producto.setDescripcion(fila.getString(0));
-            producto.setPrecio(Integer.parseInt(fila.getString(1)));
+            producto.setPrecio(fila.getString(1));
 
             baseDeDatos.close();
         }

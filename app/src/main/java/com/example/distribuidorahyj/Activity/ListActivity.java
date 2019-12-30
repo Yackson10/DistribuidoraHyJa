@@ -67,7 +67,7 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
             producto = new Producto();
             producto.setCodigo(Integer.parseInt(fila.getString(0)));
             producto.setDescripcion(fila.getString(1));
-            producto.setPrecio(Integer.parseInt(fila.getString(2)));
+            producto.setPrecio(fila.getString(2));
             listArticulos.add(producto);
         }
     }
