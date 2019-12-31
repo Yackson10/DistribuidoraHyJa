@@ -23,6 +23,7 @@ public class  Producto implements Serializable {
         return disponible;
     }
 
+
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
