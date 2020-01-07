@@ -4,14 +4,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.distribuidorahyj.Activity.MainActivity;
 import com.example.distribuidorahyj.Interface.IdialogoModificar;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.domain.Producto;
 
 public class DialogoModificarMain extends DialogFragment implements IdialogoModificar {
+
 
     Context context;
     EditText descripcionMain, precioMain;
@@ -21,6 +26,7 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
     public DialogoModificarMain(Context context) {
         this.context = context;
     }
+
     @Override
     public void modificarDialogo(Producto producto) {
 
@@ -38,7 +44,7 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
         descripcionMain.setText(producto.getDescripcion());
         precioMain.setText(String.valueOf(producto.getPrecio()));
 
-        builder.setTitle("Desea Modificar el Producto ")
+        builder.setTitle("Desea Modificar el Producto " + producto.getCodigo())
 
                 .setPositiveButton("MODIFICAR",
                         (dialog, which) -> {
@@ -48,6 +54,12 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
 
                             productoDAO = new ProductoDAO(context);
                             productoDAO.modificar(producto);
+
+                            Toast.makeText(context, "Se a modificado el Producto " + producto.getCodigo(), Toast.LENGTH_SHORT).show();
+
+
+
+
                         })
                 .setNegativeButton("CANCELAR",
                         (dialog, which) -> dialog.cancel());
@@ -57,6 +69,7 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
     public interface IProducto{
         void modificar(View view,Producto producto);
     }
+
 }
 
 

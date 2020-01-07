@@ -3,60 +3,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#83B4B0"
     android:orientation="vertical"
-    tools:context=".Activity.ConsumoApi"
-    android:background="#83B4B0">
+    tools:context=".Activity.ConsumoApi">
 
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressId"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="430dp"
         android:orientation="vertical">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
-
-        </ProgressBar>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:orientation="vertical"/>
+            android:layout_height="500dp"
+            android:orientation="vertical" />
+
+
 
     </LinearLayout>
 
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/textBuscarApi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:hint="Ingrese Id"
+        android:inputType="numberDecimal" />
 
-        <EditText
-            android:id="@+id/textBuscarApi"
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:hint="Ingrese Id"
-            android:inputType="numberDecimal"/>
+    <Button
+        android:id="@+id/btnBuscarApi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="buscarApi"
+        android:text="Buscar " />
 
-        <Button
-            android:id="@+id/btnBuscarApi"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:onClick="buscarApi"
-            android:text="Buscar "/>
+    <Button
+        android:id="@+id/btnGuardarApi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Api "/>
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnRegresarApi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="intentRegresar"
+        android:text="Regresar "/>
 
-        <Button
-            android:id="@+id/btnRegresarApi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="intentRegresar"
-            android:text="Regresar "/>
+
 
 </LinearLayout>
 

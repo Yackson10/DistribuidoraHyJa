@@ -5,7 +5,12 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Switch;
+
 import androidx.appcompat.app.AlertDialog;
+
+import com.example.distribuidorahyj.Activity.MainActivity;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.adaptadores.AdapterProducto;
 import com.example.distribuidorahyj.dao.ProductoDAO;
@@ -13,7 +18,9 @@ import com.example.distribuidorahyj.domain.Producto;
 
 public class DialogModificarList {
 
-    private EditText descripciones, precios;
+    EditText descripciones,precios;
+    Switch disponible;
+    Spinner tipoProducto;
     AdapterProducto adapter;
     ProductoDAO productoDAO;
     Context context;
@@ -31,9 +38,13 @@ public class DialogModificarList {
 
         descripciones =  views.findViewById(R.id.dialogDescripcion);
         precios = views.findViewById(R.id.dialogPrecio);
+        disponible = views.findViewById(R.id.switchDialogoModi);
+        tipoProducto = views.findViewById(R.id.idSpinnerDialoModi);
 
         descripciones.setText(producto.getDescripcion());
         precios.setText(String.valueOf(producto.getPrecio()));
+        disponible.setText(String.valueOf(producto.isDisponible()));
+        tipoProducto.setTag(producto.getTipoProducto());
 
         AlertDialog.Builder dialogo = new AlertDialog.Builder(context)
                 .setView(views)
@@ -43,13 +54,16 @@ public class DialogModificarList {
                 .setPositiveButton("Modificar",
                         (DialogInterface dialog, int id) -> {
 
-                            modificar(producto);
+
+                            productoDAO = new ProductoDAO(context);
+                            productoDAO.modificar(producto);
 
                             producto.setDescripcion(descripciones.getText().toString());
                             producto.setPrecio(precios.getText().toString());
+                            producto.setDisponible(Boolean.getBoolean(disponible.getText().toString()));
 
                             adapter.listDatos.set(pos, producto);
-                            adapter.notifyItemChanged(pos);
+                            adapter.notifyItemChanged(pos,producto);
 
                             dialog.dismiss();
                         })
@@ -57,7 +71,11 @@ public class DialogModificarList {
         dialogo.show();
     }
 
-    public void modificar(Producto producto) {
+    public interface IProducto{
+        void modificar(View view,Producto producto);
+    }
+
+    /*public void modificar(Producto producto) {
 
         String descripcion = descripciones.getText().toString();
         String precio = precios.getText().toString();
@@ -71,5 +89,5 @@ public class DialogModificarList {
 
             }
         }
-    }
+    }*/
 }

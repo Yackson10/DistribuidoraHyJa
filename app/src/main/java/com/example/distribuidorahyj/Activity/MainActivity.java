@@ -9,31 +9,30 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
+
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
-import com.example.distribuidorahyj.dialogos.DialogoSedesPorProducto;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
-public class MainActivity extends AppCompatActivity implements DialogoModificarMain.IProducto{
+public class MainActivity extends AppCompatActivity implements DialogoModificarMain.IProducto {
 
-    private EditText et_codigo, et_descripcion, et_precio, descripcionMain, precioMain;
-    private Button eliminar, modificar, btnConsumoApi, btnIngreseSede;
-    private Switch disponible;
-    private Spinner spinner;
+    EditText et_codigo, et_descripcion, et_precio;
+    Button eliminar, modificar, btnConsumoApi, btnIngreseSede, btnBuscar;
+    Switch disponible;
+    Spinner spinnerProducto;
     ProductoDAO productoDAO;
     Producto producto;
-    String[] TipoPrecios={"Lateos", "Carnes", "Frios", "Liquidos"};
+    String item;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,34 +41,24 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         et_codigo = findViewById(R.id.codigo);
         et_descripcion = findViewById(R.id.descripcion);
         et_precio = findViewById(R.id.precio);
-
         disponible = findViewById(R.id.switch1);
-        spinner = findViewById(R.id.idSpinner);
+        spinnerProducto = findViewById(R.id.idSpinner);
+
         eliminar = findViewById(R.id.btnEliminar);
         modificar = findViewById(R.id.btnModificar);
-        descripcionMain = findViewById(R.id.dialogoAgregarDescripcionMain);
-        precioMain = findViewById(R.id.dialogoAgregarPrecioMain);
+
+        //btnBuscar = (Button) findViewById(R.id.btnBuscar);
         btnConsumoApi = findViewById(R.id.btnConsumoApi);
         btnIngreseSede = findViewById(R.id.btnSede);
 
+        dialogoEliminar();
 
-
-        ArrayAdapter<Producto> adapter = new ArrayAdapter<>(this, R.layout.item_adapter_spinner, R.id.textSpinner, Producto.getProducto("<z"));
-        spinner.setAdapter(adapter);
-
-        /*spinner.setOnItemClickListener(new AdapterView.OnItemSelectedListener() {
+        /*btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                //consultar();
             }
         });*/
-
-        dialogoEliminar();
 
         btnConsumoApi.setOnClickListener(v -> {
             Intent consumoApi = new Intent(getApplicationContext(), ConsumoApi.class);
@@ -101,7 +90,23 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
                     Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoNoDispo), Toast.LENGTH_SHORT).show();
             }
         });
+
+        spinnerProducto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                item = String.valueOf(parent.getItemAtPosition(position));
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
     }
+
 
     public SQLiteDatabase Conexion() {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "BaseDeDatosDistri", null, 1);
@@ -117,14 +122,16 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         String codigo = et_codigo.getText().toString();
         String descripcion = et_descripcion.getText().toString();
         String precio = et_precio.getText().toString();
-        boolean dispo = true;
+        boolean dispo = ((Switch) findViewById(R.id.switch1)).isChecked();
+        String tipoProducto = item;
 
-        if (!codigo.isEmpty() && !descripcion.isEmpty() && !precio.isEmpty()) {
+
+        if (!codigo.isEmpty() && !descripcion.isEmpty() && !precio.isEmpty() && !tipoProducto.isEmpty()) {
 
             productoDAO = new ProductoDAO(this);
 
             Cursor fila = oConexion.rawQuery
-                    ("select descripcion, precio from articulos where codigo =" + codigo, null);
+                    ("select descripcion, precio, disponible, tipoProducto from articulos where codigo =" + codigo, null);
 
             if (fila.moveToFirst()) {
                 Toast.makeText(this, this.getString(R.string.canbia), Toast.LENGTH_SHORT).show();
@@ -135,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
                 registro.put("descripcion", descripcion);
                 registro.put("precio", precio);
                 registro.put("disponible", dispo);
+                registro.put("tipoProducto", tipoProducto);
 
                 oConexion.insert("articulos", null, registro);
 
@@ -146,10 +154,51 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         }
     }
 
-    //Metodo para Buscar Articulos o productos
+    /*public void consultar() {
+
+        SQLiteDatabase conexion = Conexion();
+
+        String[] parametros = {et_codigo.getText().toString()};
+        String[] campos = {Tabla_Producto.CAMPO_DESCRIPCION, Tabla_Producto.CAMPO_PRECIO};
+
+        String[] parametros2 = {et_descripcion.getText().toString()};
+        String[] campus = {Tabla_Producto.CAMPO_CODIGO, Tabla_Producto.CAMPO_PRECIO};
+
+
+        Cursor cursor1 = conexion.query(Tabla_Producto.TABLA_ARTICULOS, campos, Tabla_Producto.CAMPO_CODIGO + "=?", parametros, null, null, null);
+        Cursor cursor2 = conexion.query(Tabla_Producto.TABLA_ARTICULOS, campus, Tabla_Producto.CAMPO_DESCRIPCION + "=?", parametros2, null, null, null);
+
+
+        try {
+
+            if (cursor1.moveToFirst()) {
+                et_descripcion.setText(cursor1.getString(0));
+                et_precio.setText(cursor1.getString(1));
+                modificar.setEnabled(true);
+                eliminar.setEnabled(true);
+                //cursor1.close();
+            } else {
+                cursor2.moveToFirst();
+                et_codigo.setText(cursor2.getString(0));
+                et_precio.setText(cursor2.getString(1));
+                modificar.setEnabled(true);
+                eliminar.setEnabled(true);
+                cursor2.close();
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(this, "El documento No Existe", Toast.LENGTH_SHORT).show();
+            limpiar();
+        }
+
+    }*/
+
+
+    //Metodo para Buscar  productos
     public void buscarMain(View view) {
 
         String codigo = et_codigo.getText().toString();
+        //String descripcion = et_descripcion.getText().toString();
 
         if (!codigo.isEmpty()) {
 
@@ -165,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
 
                 et_descripcion.setText(producto.getDescripcion());
                 et_precio.setText(String.valueOf(producto.getPrecio()));
+                disponible.setText(String.valueOf(producto.isDisponible()));
                 modificar.setEnabled(true);
                 eliminar.setEnabled(true);
             } else {
@@ -205,8 +255,8 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
 
             if (!descripcion.isEmpty() && !precio.isEmpty()) {
 
-                modificarProd = new ProductoDAO(this);
-                int cantidad = modificarProd.modificar(productos);
+                productoDAO = new ProductoDAO(this);
+                int cantidad = productoDAO.modificar(producto);
 
                 if (cantidad == 1) {
                     Toast.makeText(this, this.getString(R.string.Modificado), Toast.LENGTH_LONG).show();

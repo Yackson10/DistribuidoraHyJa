@@ -90,7 +90,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="Ir"
-            android:onClick="itemclickIrUrl"/>
+            android:onClick="url"/>
 
     </LinearLayout>
 

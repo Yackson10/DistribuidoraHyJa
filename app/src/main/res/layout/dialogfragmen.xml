@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="15dp">
+    android:layout_margin="15dp"
+    android:orientation="vertical">
 
 
     <EditText
         android:id="@+id/dialogDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingrese Descripcion"/>
+        android:hint="Ingrese Descripcion" />
 
     <EditText
         android:id="@+id/dialogPrecio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingrese Precio"/>
+        android:hint="Ingrese Precio" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="10">
+
+        <Switch
+            android:id="@+id/switchDialogoModi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Disponible"
+            android:textOff="Disponible"
+            android:textOn="No disponible" />
+
+        <Spinner
+            android:id="@+id/idSpinnerDialoModi"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/array_Producto" />
 
     </LinearLayout>
 

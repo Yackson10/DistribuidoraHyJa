@@ -11,4 +11,5 @@ public class Tabla_Producto {
 
 
     public static final String CREAR_TABLA_ARTICULOS="CREATE TABLE "+ TABLA_ARTICULOS+" ("+CAMPO_CODIGO+" INTEGER primary key, "+CAMPO_DESCRIPCION+" TEXT," + CAMPO_PRECIO+" TEXT, "+CAMPO_DISPONIBLE+" BOOLEAN, "+CAMPO_TIPOPRODUCTO+" TEXT)";
+
 }

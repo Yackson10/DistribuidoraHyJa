@@ -60,7 +60,7 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
 
         Cursor fila = oConexion.rawQuery
 
-                ("select codigo,descripcion,precio from articulos", null);
+                ("select codigo,descripcion,precio,disponible,tipoProducto from articulos", null);
 
         for (fila.moveToFirst(); !fila.isAfterLast(); fila.moveToNext()) {
 
@@ -68,6 +68,8 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
             producto.setCodigo(Integer.parseInt(fila.getString(0)));
             producto.setDescripcion(fila.getString(1));
             producto.setPrecio(fila.getString(2));
+            producto.setDisponible(Boolean.parseBoolean(fila.getString(3)));
+            producto.setTipoProducto(fila.getString(4));
             listArticulos.add(producto);
         }
     }
@@ -126,4 +128,6 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
         Intent regresar = new Intent(this, MainActivity.class);
         startActivity(regresar);
     }
+
+    
 }

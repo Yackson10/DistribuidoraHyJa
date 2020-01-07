@@ -17,4 +17,21 @@
     <string name="canbia">El producto ya existe, si desea agregarlo cambia el codigo</string>
 
 
+    <string-array name="array_Producto">
+        <item>Lateos</item>
+        <item>Frios</item>
+        <item>Liquidos</item>
+        <item>Carnes</item>
+    </string-array>
+
+    <string-array name="array_Sede">
+        <item>La salle</item>
+        <item>El jardin</item>
+        <item>Aranjuez</item>
+        <item>Granizal</item>
+        <item>Campo Valdez</item>
+
+    </string-array>
+
+
 </resources>

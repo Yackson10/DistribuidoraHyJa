@@ -11,17 +11,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/registro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Productos" />
+        <TextView
+            android:id="@+id/registro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sedes" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"/>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:entries="@array/array_Sede"/>
 
     </LinearLayout>
 
@@ -35,13 +36,14 @@
             android:id="@+id/textNombreSede"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre " />
+            android:text="Productos" />
 
-        <TextView
-            android:id="@+id/textDepartamentoSede"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerId"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Departamento" />
+            android:layout_height="400dp"
+            android:orientation="horizontal" />
+
 
     </LinearLayout>
 

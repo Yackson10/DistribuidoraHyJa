@@ -43,11 +43,11 @@ public class AdapterPhotos extends  RecyclerView.Adapter<AdapterPhotos.ViewHolde
         return listPhotos.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView album, id, titulo, url, thumbnailURL;
 
-         ViewHolder(View itemView) {
+         public ViewHolder(View itemView) {
             super(itemView);
             album = (TextView)itemView.findViewById(R.id.album);
             id = (TextView)itemView.findViewById(R.id.id);

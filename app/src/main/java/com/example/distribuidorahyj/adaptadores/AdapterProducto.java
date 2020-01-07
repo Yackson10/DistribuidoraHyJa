@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.distribuidorahyj.R;
@@ -35,10 +36,14 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     public void onBindViewHolder(ViewHolderDatos viewHolderDatos, int i){
         Producto producto = listDatos.get(i);
 
-
         viewHolderDatos.codigo.setText(String.valueOf(producto.getCodigo()));
         viewHolderDatos.descripcion.setText(producto.getDescripcion());
         viewHolderDatos.precio.setText(String.valueOf(producto.getPrecio()));
+
+        viewHolderDatos.disponible.setText(String.valueOf(producto.isDisponible()));
+        viewHolderDatos.tipoProducto.setText(producto.getTipoProducto());
+
+        //viewHolderDatos.imagen.setImageResource();
 
         viewHolderDatos.asignarEventos(producto,viewHolderDatos.getAdapterPosition());
         viewHolderDatos.asignarEvento(producto,viewHolderDatos.getAdapterPosition());
@@ -55,14 +60,25 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
         TextView codigo;
         TextView descripcion;
         TextView precio;
+        TextView disponible;
+        TextView tipoProducto;
+        ImageView imagen;
+
         ImageButton eliminar;
         ImageButton modificar;
+
 
         public ViewHolderDatos(View itemView) {
             super(itemView);
             codigo=(TextView)itemView.findViewById(R.id.txtVcod);
             descripcion=(TextView)itemView.findViewById(R.id.txtVdes);
             precio=(TextView)itemView.findViewById(R.id.txtVpre);
+
+            disponible=(TextView)itemView.findViewById(R.id.txtVdispo);
+            tipoProducto= (TextView)itemView.findViewById(R.id.txtVtipoProducto);
+
+           // imagen = (ImageView)itemView.findViewById(R.imagen);
+
             eliminar = (ImageButton)itemView.findViewById(R.id.imageliminar);
             modificar = (ImageButton)itemView.findViewById(R.id.imageModificar);
             codigo.setOnClickListener(this);
@@ -77,7 +93,6 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
                     }
                 }
             });
-
         }
 
         private void asignarEvento(final Producto producto, final int pos){
@@ -87,7 +102,6 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
                     if (nClickListener != null) {
                         nClickListener.itemclicks(v,producto,pos);
                     }
-
                 }
             });
         }
@@ -95,7 +109,6 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
         @Override
         public void onClick(View v) {
         }
-
     }
 
     public interface onItemClick{
