@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
@@ -17,7 +18,7 @@ public class ProductoDAO {
     }
 
     public int eliminar(Producto producto) {
-        return baseDeDatos.delete("articulos", "codigo =" + producto.getCodigo(), null);
+        return baseDeDatos.delete("articulos", "codigo=" + producto.getCodigo(), null);
     }
 
     public int modificar(Producto producto) {
@@ -28,24 +29,32 @@ public class ProductoDAO {
         registro.put("descripcion", producto.getDescripcion());
         registro.put("precio", producto.getPrecio());
         registro.put("disponible", producto.isDisponible());
+        registro.put("tipoProducto", producto.getTipoProducto());
 
         return baseDeDatos.update("articulos", registro, "codigo=" + producto.getCodigo(), null);
 
     }
 
-    public Producto buscar(String codigo) {
+    public Producto buscar(String buscar) {
 
         Producto producto = null;
+        String where = "";
 
-        Cursor fila = baseDeDatos.rawQuery
-                ("select descripcion, precio from articulos where codigo =" + codigo, null);
+        if (!buscar.isEmpty()) {
 
-        if (fila.moveToFirst()) {
+            where = " where codigo LIKE '%" + buscar + "%' or  descripcion LIKE '%" + buscar + "%'";
+        }
+
+        Cursor cursor = baseDeDatos.rawQuery
+                ("select * from articulos " + where, null);
+
+        if (cursor.moveToFirst()) {
             producto = new Producto();
-            producto.setCodigo(Integer.parseInt(codigo));
-            producto.setDescripcion(fila.getString(0));
-            producto.setPrecio(fila.getString(1));
-            //producto.setDisponible(Boolean.parseBoolean(fila.getString(2)));
+            producto.setCodigo(Integer.parseInt(cursor.getString(0)));
+            producto.setDescripcion(cursor.getString(1));
+            producto.setPrecio(cursor.getString(2));
+            producto.setDisponible(Boolean.parseBoolean(cursor.getString(3)));
+            producto.setTipoProducto(cursor.getString(4));
 
             baseDeDatos.close();
         }
@@ -54,20 +63,15 @@ public class ProductoDAO {
 
     public void Registrar(Producto producto) {
 
-        Cursor fila = baseDeDatos.rawQuery
-                ("select descripcion, precio from articulos where codigo =" + producto.getCodigo(), null);
+        ContentValues agregar = new ContentValues();
 
-        if (fila.moveToFirst()) {
-            baseDeDatos.close();
-        } else {
+        agregar.put("codigo", producto.getCodigo());
+        agregar.put("descripcion", producto.getDescripcion());
+        agregar.put("precio", producto.getPrecio());
+        agregar.put("disponible", producto.isDisponible());
+        agregar.put("tipoProducto", producto.getTipoProducto());
 
-            ContentValues agregar = new ContentValues();
-
-            agregar.put("codigo", producto.getCodigo());
-            agregar.put("descripcion", producto.getDescripcion());
-            agregar.put("precio", producto.getPrecio());
-
-            baseDeDatos.insert("articulos", null, agregar);
-        }
+        baseDeDatos.insert("articulos", null, agregar);
     }
 }
+

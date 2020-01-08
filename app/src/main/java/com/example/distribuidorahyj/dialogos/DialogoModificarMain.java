@@ -5,11 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-
-import com.example.distribuidorahyj.Activity.MainActivity;
 import com.example.distribuidorahyj.Interface.IdialogoModificar;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
@@ -20,7 +17,8 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
 
     Context context;
     EditText descripcionMain, precioMain;
-    IProducto mClickListener;
+    //IProducto mClickListener;
+    EditText codigo, descripcion, precio;
     ProductoDAO productoDAO;
 
     public DialogoModificarMain(Context context) {
@@ -57,18 +55,17 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
 
                             Toast.makeText(context, "Se a modificado el Producto " + producto.getCodigo(), Toast.LENGTH_SHORT).show();
 
-
-
-
                         })
                 .setNegativeButton("CANCELAR",
                         (dialog, which) -> dialog.cancel());
+
         builder.show();
     }
 
-    public interface IProducto{
+
+    /*public interface IProducto{
         void modificar(View view,Producto producto);
-    }
+    }*/
 
 }
 

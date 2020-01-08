@@ -17,6 +17,7 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     public ArrayList<Producto> listDatos;
     private onItemClick mClickListener;
     private onItemClicks nClickListener;
+   // private  onItemClicka aClickListener;
     ProductoDAO eliProducto;
     ProductoDAO modiProducto;
 
@@ -39,14 +40,22 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
         viewHolderDatos.codigo.setText(String.valueOf(producto.getCodigo()));
         viewHolderDatos.descripcion.setText(producto.getDescripcion());
         viewHolderDatos.precio.setText(String.valueOf(producto.getPrecio()));
-
         viewHolderDatos.disponible.setText(String.valueOf(producto.isDisponible()));
         viewHolderDatos.tipoProducto.setText(producto.getTipoProducto());
 
-        //viewHolderDatos.imagen.setImageResource();
+        if(producto.getTipoProducto().equals("Carnes")){
+            viewHolderDatos.imagen.setImageResource(R.drawable.carnes);
+        }else if(producto.getTipoProducto().equals("Lateos")){
+            viewHolderDatos.imagen.setImageResource(R.drawable.lateos);
+         }else if(producto.getTipoProducto().equals("Liquidos")){
+            viewHolderDatos.imagen.setImageResource(R.drawable.liquido);
+        }else {
+            viewHolderDatos.imagen.setImageResource(R.drawable.hielo);
+        }
 
         viewHolderDatos.asignarEventos(producto,viewHolderDatos.getAdapterPosition());
         viewHolderDatos.asignarEvento(producto,viewHolderDatos.getAdapterPosition());
+        //viewHolderDatos.agregarEventoProducto(producto,viewHolderDatos.getAdapterPosition());
 
     }
 
@@ -54,6 +63,7 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     public int getItemCount() {
         return listDatos.size();
     }
+
 
     public class ViewHolderDatos extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -66,19 +76,20 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
 
         ImageButton eliminar;
         ImageButton modificar;
+        //ImageButton agregar;
 
 
-        public ViewHolderDatos(View itemView) {
+        ViewHolderDatos(View itemView) {
             super(itemView);
             codigo=(TextView)itemView.findViewById(R.id.txtVcod);
             descripcion=(TextView)itemView.findViewById(R.id.txtVdes);
             precio=(TextView)itemView.findViewById(R.id.txtVpre);
-
             disponible=(TextView)itemView.findViewById(R.id.txtVdispo);
             tipoProducto= (TextView)itemView.findViewById(R.id.txtVtipoProducto);
 
-           // imagen = (ImageView)itemView.findViewById(R.imagen);
+            imagen = (ImageView)itemView.findViewById(R.id.imagen);
 
+            //agregar = (ImageButton)itemView.findViewById(R.id.iconAgregar);
             eliminar = (ImageButton)itemView.findViewById(R.id.imageliminar);
             modificar = (ImageButton)itemView.findViewById(R.id.imageModificar);
             codigo.setOnClickListener(this);
@@ -106,6 +117,17 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
             });
         }
 
+        /*private void agregarEventoProducto(final Producto producto, final int pos){
+            agregar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (aClickListener != null) {
+                        aClickListener.itemclicka(v,producto,pos);
+                    }
+                }
+            });
+        }*/
+
         @Override
         public void onClick(View v) {
         }
@@ -126,4 +148,12 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
      public void setClickListeners(onItemClicks itemClicksListeners){
         this.nClickListener = itemClicksListeners;
      }
+
+    /*public interface onItemClicka {
+        void itemclicka(View view, Producto position,int pos);
+    }
+
+    public void setClickListenerA(onItemClicka itemClicksListenerA){
+        this.aClickListener = itemClicksListenerA;
+    }*/
 }

@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 import java.util.ArrayList;
 import android.database.Cursor;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.adaptadores.AdapterProducto;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogModificarList;
+import com.example.distribuidorahyj.dialogos.DialogoAgregarListado;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
@@ -27,11 +29,14 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
     RecyclerView recyclerViewArticulos;
     ProductoDAO eliminarProd;
     AdapterProducto adapter;
+    ImageButton agregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lis_view);
+
+        agregar = (ImageButton)findViewById(R.id.iconAgregar);
 
         recyclerViewArticulos = findViewById(R.id.recyclerId);
         recyclerViewArticulos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -43,8 +48,15 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
         adapter = new AdapterProducto(listArticulos, new ProductoDAO(this));
         adapter.setClickListener(this);
         adapter.setClickListeners(this);
+        //adapter.setClickListenerA(this);
 
         recyclerViewArticulos.setAdapter(adapter);
+
+        agregar.setOnClickListener(v -> {
+            DialogoAgregarListado dialogoAgregarListado= new DialogoAgregarListado(context);
+            dialogoAgregarListado.DialogoAgregarProducto(producto);
+
+        });
     }
 
     public SQLiteDatabase Conexion() {
@@ -124,10 +136,16 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
         dialogo.itemclickd(producto, pos);
     }
 
+
     public void regresar(View view) {
         Intent regresar = new Intent(this, MainActivity.class);
         startActivity(regresar);
     }
 
-    
+    /*@Override
+    public void itemclicka(final View view, final Producto producto, int pos) {
+        DialogoAgregarListado dialogoAgregarListado = new DialogoAgregarListado(context, adapter);
+        dialogoAgregarListado.DialogoAgregarProducto(producto, pos);
+    }*/
+
 }

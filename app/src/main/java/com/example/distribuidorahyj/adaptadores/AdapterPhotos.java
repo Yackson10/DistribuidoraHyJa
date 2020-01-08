@@ -35,7 +35,6 @@ public class AdapterPhotos extends  RecyclerView.Adapter<AdapterPhotos.ViewHolde
         holder.titulo.setText(photos.getTitle());
         holder.url.setText(photos.getUrl());
         holder.thumbnailURL.setText(photos.getThumbnailUrl());
-
     }
 
     @Override

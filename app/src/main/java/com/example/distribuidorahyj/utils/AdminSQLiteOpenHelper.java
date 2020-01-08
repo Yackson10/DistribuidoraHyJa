@@ -14,13 +14,14 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase baseDeDatos) {
-        //baseDeDatos.execSQL("create table sede(codigo int primary key, nombre text, Departamento text)");
-        baseDeDatos.execSQL("create table cliente(id int primary key)");
-        //baseDeDatos.execSQL("create table s(albumId int primary key, id int, title text, url text, thumbnailUrl text)");
+        baseDeDatos.execSQL(Tabla_Cliente.CREAR_TABLA_CLIENTE);
         baseDeDatos.execSQL(Tabla_Photos.CREAR_TABLA_PHOTOS);
         baseDeDatos.execSQL(Tabla_Producto.CREAR_TABLA_ARTICULOS);
         baseDeDatos.execSQL(Tabla_Sede.CREAR_TABLA_SEDE);
         baseDeDatos.execSQL(Tabla_ProductoXSede.CREAR_TABLA_PRODUCTOXSEDE);
+
+        cargarDatos(baseDeDatos);
+
     }
 
     @Override
@@ -29,12 +30,21 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
         baseDeDatos.execSQL("DROP TABLE IF EXISTS producto");
         baseDeDatos.execSQL("DROP TABLE IF EXISTS sede");
         baseDeDatos.execSQL("DROP TABLE IF EXISTS productoXSede");
+        baseDeDatos.execSQL("DROP TABLE IF EXISTS cliente");
 
         onCreate(baseDeDatos);
     }
 
+    public void cargarDatos(SQLiteDatabase baseDeDatos){
+        baseDeDatos.execSQL("INSERT INTO sede VALUES('1','Manrique','Medellin')");
+        baseDeDatos.execSQL("INSERT INTO sede VALUES('2','Aranjuez','Cali')");
+        baseDeDatos.execSQL("INSERT INTO sede VALUES('3','CampoValdez','Barranquilla')");
+        baseDeDatos.execSQL("INSERT INTO sede VALUES('4','SanPablo','Bogota')");
+        baseDeDatos.execSQL("INSERT INTO sede VALUES('5','Granizal','Pasto')");
+        baseDeDatos.execSQL("INSERT INTO sede VALUES('6','LaSalle','Cartagena')");
 
+    }
 }
-//dsf
+
 
 

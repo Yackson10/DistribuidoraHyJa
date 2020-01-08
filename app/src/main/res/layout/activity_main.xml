@@ -17,11 +17,10 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/codigo"
+            android:id="@+id/editBuscar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/txt_1"
-            android:inputType="number"
+            android:hint="Ingrese datos a buscar"
             android:maxLength="10"
             android:textSize="14sp" />
 
@@ -33,6 +32,17 @@
             android:onClick="buscarMain"
             android:text="@string/btnBuscar"
             android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/codigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/txt_1"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textSize="14sp" />
+
+
 
 
         <EditText

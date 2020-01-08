@@ -7,10 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
-
 import androidx.appcompat.app.AlertDialog;
-
-import com.example.distribuidorahyj.Activity.MainActivity;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.adaptadores.AdapterProducto;
 import com.example.distribuidorahyj.dao.ProductoDAO;
@@ -54,13 +51,12 @@ public class DialogModificarList {
                 .setPositiveButton("Modificar",
                         (DialogInterface dialog, int id) -> {
 
-
-                            productoDAO = new ProductoDAO(context);
-                            productoDAO.modificar(producto);
-
                             producto.setDescripcion(descripciones.getText().toString());
                             producto.setPrecio(precios.getText().toString());
                             producto.setDisponible(Boolean.getBoolean(disponible.getText().toString()));
+
+                            productoDAO = new ProductoDAO(context);
+                            productoDAO.modificar(producto);
 
                             adapter.listDatos.set(pos, producto);
                             adapter.notifyItemChanged(pos,producto);
@@ -75,19 +71,4 @@ public class DialogModificarList {
         void modificar(View view,Producto producto);
     }
 
-    /*public void modificar(Producto producto) {
-
-        String descripcion = descripciones.getText().toString();
-        String precio = precios.getText().toString();
-
-        if (!producto.getCodigo().isEmpty()) {
-
-            if (!producto.getCodigo().isEmpty() && !descripcion.isEmpty() && !precio.isEmpty()) {
-
-                productoDAO = new ProductoDAO(context);
-                productoDAO.modificar(producto);
-
-            }
-        }
-    }*/
 }

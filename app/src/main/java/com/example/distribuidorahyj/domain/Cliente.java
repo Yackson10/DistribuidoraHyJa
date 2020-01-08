@@ -4,16 +4,14 @@ import java.io.Serializable;
 
 public class Cliente implements Serializable {
 
-    String nombre;
-    String apellido;
-    int edad;
-    String telefono;
-    String correo;
+    private String nombre;
+    private String apellido;
+    private String telefono;
+    private String correo;
 
-    public Cliente(String nombre, String apellido, int edad, String telefono, String correo) {
+    public Cliente(String nombre, String apellido, String telefono, String correo) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.edad = edad;
         this.telefono = telefono;
         this.correo = correo;
     }
@@ -32,14 +30,6 @@ public class Cliente implements Serializable {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public String getTelefono() {

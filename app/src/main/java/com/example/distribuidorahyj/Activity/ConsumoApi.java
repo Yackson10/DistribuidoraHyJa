@@ -13,19 +13,26 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.distribuidorahyj.Interface.JsonplaceholderApi;
 import com.example.distribuidorahyj.ServiceApi;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.domain.Photos;
 import com.example.distribuidorahyj.adaptadores.AdapterPhotos;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,8 +85,6 @@ public class ConsumoApi extends AppCompatActivity {
 
                     progressDialog.setVisibility(recyclerView.GONE);
                     adapter.setItems(listPhotos);
-
-
                 }
             }
 
@@ -93,52 +98,20 @@ public class ConsumoApi extends AppCompatActivity {
             public void onClick(View v) {
                 for (Photos list : listPhotos
                 ) {
-                    //guardar(list);
+                    guardar(list);
+
                 }
             }
         });
-
-
-
-        /*buscarApiId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog = new ProgressDialog(ConsumoApi.this);
-                progressDialog.setMax(100);
-                progressDialog.setMessage("Cargando");
-                progressDialog.setTitle("Cargando");
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                progressDialog.show();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try{
-                            while(progressDialog.getProgress() <= progressDialog.getMax()){
-                                Thread.sleep(200);
-                            }
-                        }catch (Exception e){
-                            e.printStackTrace();
-
-                        }
-                    }
-                }).start();
-            }
-        });
-    }
-    Handler handler = new Handler(){
-        public void handleMessage(Message msg){
-            super.handleMessage(msg);
-            progressDialog.incrementProgressBy(1);
-        }
-    };*/
-
     }
 
-        public void url(View v) {
+    public void url(View v) {
+        url = (TextView) findViewById(R.id.url);
+        if (URLUtil.isValidUrl(url.getText().toString())) {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url.getText().toString()));
             startActivity(intent);
         }
-
+    }
 
     public void buscarApi(View view) {
 
@@ -178,28 +151,23 @@ public class ConsumoApi extends AppCompatActivity {
     private void guardar(Photos photos) {
 
 
-            SQLiteDatabase Conexion = consumoApiConexion();
+        SQLiteDatabase Conexion = consumoApiConexion();
 
-            ContentValues values = new ContentValues();
-            Photos photo = new Photos();
+        ContentValues values = new ContentValues();
+        Photos photo = new Photos();
 
-            values.put(String.valueOf(photo.getId()), String.valueOf(photos.getId()));
-            values.put(String.valueOf(photo.getAlbumId()), String.valueOf(photos.getAlbumId()));
-            values.put(String.valueOf(photo.getId()), String.valueOf(photos.getId()));
-            values.put(photo.getTitle(), photos.getTitle());
-            values.put(photo.getUrl(), photos.getUrl());
-            values.put(photo.getThumbnailUrl(), photos.getThumbnailUrl());
+        values.put("albumId", String.valueOf(photos.getId()));
+        values.put("id", String.valueOf(photos.getAlbumId()));
+        values.put("title", String.valueOf(photos.getId()));
+        values.put("url", photos.getTitle());
+        values.put("thumbnailUrl", photos.getThumbnailUrl());
 
-            Conexion.insert("photos", null, values);
+        Conexion.insert("photos", null, values);
 
-            Toast.makeText(getApplicationContext(), "Se gurdaron los datos  " + photos.getId(), Toast.LENGTH_SHORT).show();
-            Conexion.close();
+        Toast.makeText(getApplicationContext(), "Se gurdaron los datos  " + photos.getId(), Toast.LENGTH_SHORT).show();
+        Conexion.close();
 
     }
-
-
-
-
 
 
 }

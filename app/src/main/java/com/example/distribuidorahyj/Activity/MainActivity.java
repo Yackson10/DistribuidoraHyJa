@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -20,13 +19,14 @@ import android.widget.Toast;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
+import com.example.distribuidorahyj.dialogos.DialogoSedesPorProducto;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
 
-public class MainActivity extends AppCompatActivity implements DialogoModificarMain.IProducto {
+public class MainActivity extends AppCompatActivity {
 
-    EditText et_codigo, et_descripcion, et_precio;
-    Button eliminar, modificar, btnConsumoApi, btnIngreseSede, btnBuscar;
+    EditText et_codigo, et_descripcion, et_precio, editBuscar;
+    Button eliminar, modificar, btnConsumoApi, btnIngreseSede;
     Switch disponible;
     Spinner spinnerProducto;
     ProductoDAO productoDAO;
@@ -38,39 +38,30 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         et_codigo = findViewById(R.id.codigo);
         et_descripcion = findViewById(R.id.descripcion);
         et_precio = findViewById(R.id.precio);
         disponible = findViewById(R.id.switch1);
         spinnerProducto = findViewById(R.id.idSpinner);
+        editBuscar = findViewById(R.id.editBuscar);
 
         eliminar = findViewById(R.id.btnEliminar);
         modificar = findViewById(R.id.btnModificar);
 
-        //btnBuscar = (Button) findViewById(R.id.btnBuscar);
         btnConsumoApi = findViewById(R.id.btnConsumoApi);
         btnIngreseSede = findViewById(R.id.btnSede);
 
         dialogoEliminar();
-
-        /*btnBuscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //consultar();
-            }
-        });*/
 
         btnConsumoApi.setOnClickListener(v -> {
             Intent consumoApi = new Intent(getApplicationContext(), ConsumoApi.class);
             startActivity(consumoApi);
         });
 
-        btnIngreseSede.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogoSedesPorProducto dialogoSedesPorProducto = new DialogoSedesPorProducto(MainActivity.this);
-                dialogoSedesPorProducto.DialogoSedes(producto);
-            }
+        btnIngreseSede.setOnClickListener(v -> {
+            DialogoSedesPorProducto dialogoSedesPorProducto = new DialogoSedesPorProducto(MainActivity.this);
+            dialogoSedesPorProducto.DialogoSedes(producto);
         });
 
         modificar.setOnClickListener(new View.OnClickListener() {
@@ -78,17 +69,15 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
             public void onClick(View v) {
                 DialogoModificarMain AlertDialog = new DialogoModificarMain(MainActivity.this);
                 AlertDialog.modificarDialogo(producto);
+
             }
         });
 
-        disponible.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked)
-                    Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoDispo), Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoNoDispo), Toast.LENGTH_SHORT).show();
-            }
+        disponible.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked)
+                Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoDispo), Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(MainActivity.this.getApplicationContext(), MainActivity.this.getApplicationContext().getString(R.string.textoNoDispo), Toast.LENGTH_SHORT).show();
         });
 
         spinnerProducto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -103,10 +92,7 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
 
             }
         });
-
-
     }
-
 
     public SQLiteDatabase Conexion() {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "BaseDeDatosDistri", null, 1);
@@ -154,75 +140,35 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         }
     }
 
-    /*public void consultar() {
-
-        SQLiteDatabase conexion = Conexion();
-
-        String[] parametros = {et_codigo.getText().toString()};
-        String[] campos = {Tabla_Producto.CAMPO_DESCRIPCION, Tabla_Producto.CAMPO_PRECIO};
-
-        String[] parametros2 = {et_descripcion.getText().toString()};
-        String[] campus = {Tabla_Producto.CAMPO_CODIGO, Tabla_Producto.CAMPO_PRECIO};
-
-
-        Cursor cursor1 = conexion.query(Tabla_Producto.TABLA_ARTICULOS, campos, Tabla_Producto.CAMPO_CODIGO + "=?", parametros, null, null, null);
-        Cursor cursor2 = conexion.query(Tabla_Producto.TABLA_ARTICULOS, campus, Tabla_Producto.CAMPO_DESCRIPCION + "=?", parametros2, null, null, null);
-
-
-        try {
-
-            if (cursor1.moveToFirst()) {
-                et_descripcion.setText(cursor1.getString(0));
-                et_precio.setText(cursor1.getString(1));
-                modificar.setEnabled(true);
-                eliminar.setEnabled(true);
-                //cursor1.close();
-            } else {
-                cursor2.moveToFirst();
-                et_codigo.setText(cursor2.getString(0));
-                et_precio.setText(cursor2.getString(1));
-                modificar.setEnabled(true);
-                eliminar.setEnabled(true);
-                cursor2.close();
-            }
-
-        } catch (Exception e) {
-            Toast.makeText(this, "El documento No Existe", Toast.LENGTH_SHORT).show();
-            limpiar();
-        }
-
-    }*/
-
-
     //Metodo para Buscar  productos
     public void buscarMain(View view) {
 
-        String codigo = et_codigo.getText().toString();
-        //String descripcion = et_descripcion.getText().toString();
+        limpiar();
+        String buscar = editBuscar.getText().toString();
 
-        if (!codigo.isEmpty()) {
+        if (!buscar.isEmpty()) {
 
             productoDAO = new ProductoDAO(this);
 
-            this.producto = productoDAO.buscar(codigo);
+            this.producto = productoDAO.buscar(buscar);
 
-            if (producto == null) {
-                Toast.makeText(this, this.getString(R.string.NoExiste), Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (!producto.getCodigo().equals("0")) {
+            if (producto != null) {
 
+                et_codigo.setText(producto.getCodigo());
                 et_descripcion.setText(producto.getDescripcion());
                 et_precio.setText(String.valueOf(producto.getPrecio()));
                 disponible.setText(String.valueOf(producto.isDisponible()));
+
                 modificar.setEnabled(true);
                 eliminar.setEnabled(true);
+
             } else {
                 Toast.makeText(this, this.getString(R.string.NoExiste), Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, this.getString(R.string.IngresarCodig), Toast.LENGTH_SHORT).show();
         }
+
     }
 
     public void eliminar(Producto producto) {
@@ -306,11 +252,12 @@ public class MainActivity extends AppCompatActivity implements DialogoModificarM
         et_precio.setText("");
     }
 
-    @Override
+    /*@Override
     public void modificar(View view, Producto producto) {
         productoDAO = new ProductoDAO(this);
         productoDAO.modificar(producto);
-    }
+
+    }*/
 
 }
 

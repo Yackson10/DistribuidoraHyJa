@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.DialogoSedesPorProducto"></activity>
+        <activity android:name=".dialogos.DialogoSedesPorProducto"></activity>
         <activity android:name=".Activity.ConsumoApi" />
         <activity android:name=".Activity.ListActivity" />
         <activity android:name=".Activity.MainActivity">
