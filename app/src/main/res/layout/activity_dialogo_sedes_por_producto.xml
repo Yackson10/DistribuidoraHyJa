@@ -18,10 +18,10 @@
             android:text="Sedes" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerSede"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginBottom="30dp"/>
 
     </LinearLayout>
 
@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <TextView
             android:id="@+id/textNombreSede"
             android:layout_width="match_parent"
@@ -38,9 +37,9 @@
             android:text="Productos" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerId"
+            android:id="@+id/recyclerId2"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="100dp"
             android:orientation="horizontal" />
 
 

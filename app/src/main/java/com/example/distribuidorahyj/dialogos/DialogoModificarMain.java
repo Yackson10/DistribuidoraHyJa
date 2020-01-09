@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -17,6 +19,8 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
 
     Context context;
     EditText descripcionMain, precioMain;
+    Switch disponibleMain;
+    Spinner tipoProductoMain;
     //IProducto mClickListener;
     EditText codigo, descripcion, precio;
     ProductoDAO productoDAO;
@@ -38,9 +42,15 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
 
         descripcionMain =view.findViewById(R.id.dialogoAgregarDescripcionMain);
         precioMain = view.findViewById(R.id.dialogoAgregarPrecioMain);
+        disponibleMain = view.findViewById(R.id.switchDialogo);
+        tipoProductoMain = view.findViewById(R.id.idSpinnerDialogo);
+
 
         descripcionMain.setText(producto.getDescripcion());
         precioMain.setText(String.valueOf(producto.getPrecio()));
+        disponibleMain.setText(String.valueOf(producto.isDisponible()));
+        //tipoProductoMain.setText(producto.getTipoProducto());
+
 
         builder.setTitle("Desea Modificar el Producto " + producto.getCodigo())
 
@@ -49,6 +59,7 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
 
                             producto.setDescripcion(descripcionMain.getText().toString());
                             producto.setPrecio(precioMain.getText().toString());
+                            producto.setDisponible(Boolean.parseBoolean(disponibleMain.getText().toString()));
 
                             productoDAO = new ProductoDAO(context);
                             productoDAO.modificar(producto);

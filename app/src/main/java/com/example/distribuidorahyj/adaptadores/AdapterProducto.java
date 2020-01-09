@@ -17,7 +17,7 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     public ArrayList<Producto> listDatos;
     private onItemClick mClickListener;
     private onItemClicks nClickListener;
-   // private  onItemClicka aClickListener;
+   //private  onItemClicka aClickListener;
     ProductoDAO eliProducto;
     ProductoDAO modiProducto;
 
@@ -31,6 +31,7 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     public AdapterProducto.ViewHolderDatos onCreateViewHolder(ViewGroup viewGroup , int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list,viewGroup,false);
         return new ViewHolderDatos(view);
+
     }
 
     @Override
@@ -148,6 +149,10 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
      public void setClickListeners(onItemClicks itemClicksListeners){
         this.nClickListener = itemClicksListeners;
      }
+
+
+
+
 
     /*public interface onItemClicka {
         void itemclicka(View view, Producto position,int pos);
