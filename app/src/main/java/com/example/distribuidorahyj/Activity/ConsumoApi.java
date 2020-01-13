@@ -3,15 +3,11 @@ package com.example.distribuidorahyj.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.Button;
@@ -19,20 +15,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.distribuidorahyj.Interface.JsonplaceholderApi;
 import com.example.distribuidorahyj.ServiceApi;
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.domain.Photos;
 import com.example.distribuidorahyj.adaptadores.AdapterPhotos;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -154,7 +144,7 @@ public class ConsumoApi extends AppCompatActivity {
         SQLiteDatabase Conexion = consumoApiConexion();
 
         ContentValues values = new ContentValues();
-        Photos photo = new Photos();
+        //Photos photo = new Photos();
 
         values.put("albumId", String.valueOf(photos.getId()));
         values.put("id", String.valueOf(photos.getAlbumId()));
@@ -168,8 +158,6 @@ public class ConsumoApi extends AppCompatActivity {
         Conexion.close();
 
     }
-
-
 }
 
 

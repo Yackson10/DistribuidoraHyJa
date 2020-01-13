@@ -16,7 +16,7 @@
 
 
             <TextView
-                android:id="@+id/cod1"
+                android:id="@+id/cod"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/txtCodigo"
@@ -24,7 +24,7 @@
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/txtVcod1"
+                android:id="@+id/txtVcod"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="14dp" />
@@ -37,7 +37,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/des2"
+                android:id="@+id/des"
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:text="Descripción"
@@ -45,7 +45,7 @@
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/txtVdes2"
+                android:id="@+id/txtVdes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="14dp" />
@@ -58,7 +58,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pre3"
+                android:id="@+id/pre"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="1dp"
@@ -67,7 +67,7 @@
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/txtVpre3"
+                android:id="@+id/txtVpre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="number"
@@ -80,7 +80,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/dispo4"
+                android:id="@+id/dispo"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="1dp"
@@ -89,7 +89,7 @@
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/txtVdispo4"
+                android:id="@+id/txtVdispo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="14dp" />
@@ -101,7 +101,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tipoProducto5"
+                android:id="@+id/tipoProducto"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="1dp"
@@ -110,7 +110,7 @@
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/txtVtipoProducto5"
+                android:id="@+id/txtVtipoProducto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="14dp" />

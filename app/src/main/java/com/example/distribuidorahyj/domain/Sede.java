@@ -9,7 +9,7 @@ public class Sede implements Serializable {
     String nombre;
     String departamento;
 
-    public Sede() {
+    public Sede(int codigo, String nombre, String departamento) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.departamento = departamento;

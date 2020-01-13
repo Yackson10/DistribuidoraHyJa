@@ -17,11 +17,15 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.distribuidorahyj.R;
+import com.example.distribuidorahyj.adaptadores.AdapterProducto;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.dialogos.DialogoModificarMain;
 import com.example.distribuidorahyj.dialogos.DialogoSedesPorProducto;
 import com.example.distribuidorahyj.domain.Producto;
 import com.example.distribuidorahyj.utils.AdminSQLiteOpenHelper;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         et_codigo = findViewById(R.id.codigo);
         et_descripcion = findViewById(R.id.descripcion);
         et_precio = findViewById(R.id.precio);
+
         disponible = findViewById(R.id.switch1);
+
         spinnerProducto = findViewById(R.id.idSpinner);
         editBuscar = findViewById(R.id.editBuscar);
 
@@ -109,10 +115,9 @@ public class MainActivity extends AppCompatActivity {
         String descripcion = et_descripcion.getText().toString();
         String precio = et_precio.getText().toString();
         boolean dispo = ((Switch) findViewById(R.id.switch1)).isChecked();
-        String tipoProducto = item;
 
 
-        if (!codigo.isEmpty() && !descripcion.isEmpty() && !precio.isEmpty() && !tipoProducto.isEmpty()) {
+        if (!codigo.isEmpty() && !descripcion.isEmpty() && !precio.isEmpty() && !item.isEmpty()) {
 
             productoDAO = new ProductoDAO(this);
 
@@ -128,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 registro.put("descripcion", descripcion);
                 registro.put("precio", precio);
                 registro.put("disponible", dispo);
-                registro.put("tipoProducto", tipoProducto);
+                registro.put("tipoProducto", item);
 
                 oConexion.insert("articulos", null, registro);
 
@@ -153,11 +158,30 @@ public class MainActivity extends AppCompatActivity {
             this.producto = productoDAO.buscar(buscar);
 
             if (producto != null) {
+                int cont = 0;
+
+                String[] c = getResources().getStringArray(R.array.array_Producto);
+
+                for( String item: c){
+                    String[] tipo = c.toString().split(",");
+                    String prueba = c[cont].toString();
+                    String tipoPro =producto.getTipoProducto();
+
+                    if (tipoPro.equals(prueba)){
+                        cont = cont;
+                        break;
+
+                    }
+                    cont = cont +1;
+                }
 
                 et_codigo.setText(producto.getCodigo());
                 et_descripcion.setText(producto.getDescripcion());
                 et_precio.setText(String.valueOf(producto.getPrecio()));
-                disponible.setText(String.valueOf(producto.isDisponible()));
+                disponible.setChecked(Boolean.valueOf(producto.isDisponible()));
+                spinnerProducto.setSelection(cont);
+
+
 
                 modificar.setEnabled(true);
                 eliminar.setEnabled(true);

@@ -50,18 +50,28 @@ public class ProductoDAO {
 
         if (cursor.moveToFirst()) {
             producto = new Producto();
+            boolean result;
+
+            if(cursor.getString(3).equals("1")){
+                result = true;
+            }else {
+                result = false;
+            }
+
             producto.setCodigo(Integer.parseInt(cursor.getString(0)));
             producto.setDescripcion(cursor.getString(1));
             producto.setPrecio(cursor.getString(2));
-            producto.setDisponible(Boolean.parseBoolean(cursor.getString(3)));
+            producto.setDisponible(result);
             producto.setTipoProducto(cursor.getString(4));
 
+
+            String x = cursor.getString(3);
             baseDeDatos.close();
         }
         return producto;
     }
 
-    public void Registrar(Producto producto) {
+    public boolean Registrar(Producto producto) {
 
         ContentValues agregar = new ContentValues();
 
@@ -71,7 +81,13 @@ public class ProductoDAO {
         agregar.put("disponible", producto.isDisponible());
         agregar.put("tipoProducto", producto.getTipoProducto());
 
-        baseDeDatos.insert("articulos", null, agregar);
+        long result = baseDeDatos.insert("articulos", null, agregar);
+
+        if (result == -1)
+            return false;
+        else
+            return true;
     }
+
 }
 

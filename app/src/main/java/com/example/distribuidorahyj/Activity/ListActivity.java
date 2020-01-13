@@ -54,7 +54,7 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
 
         agregar.setOnClickListener(v -> {
             DialogoAgregarListado dialogoAgregarListado= new DialogoAgregarListado(context);
-            dialogoAgregarListado.DialogoAgregarProducto(producto);
+            dialogoAgregarListado.DialogoAgregarProducto();
 
         });
     }

@@ -42,14 +42,17 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
 
         descripcionMain =view.findViewById(R.id.dialogoAgregarDescripcionMain);
         precioMain = view.findViewById(R.id.dialogoAgregarPrecioMain);
-        disponibleMain = view.findViewById(R.id.switchDialogo);
-        tipoProductoMain = view.findViewById(R.id.idSpinnerDialogo);
 
+        disponibleMain = view.findViewById(R.id.switchDialogo);
+
+        tipoProductoMain = view.findViewById(R.id.idSpinnerDialogo);
 
         descripcionMain.setText(producto.getDescripcion());
         precioMain.setText(String.valueOf(producto.getPrecio()));
-        disponibleMain.setText(String.valueOf(producto.isDisponible()));
-        //tipoProductoMain.setText(producto.getTipoProducto());
+        disponibleMain.setChecked(Boolean.valueOf(producto.isDisponible()));
+        //tipoProductoMain.setSelection(Integer.parseInt(producto.getTipoProducto()));
+
+
 
 
         builder.setTitle("Desea Modificar el Producto " + producto.getCodigo())
@@ -57,12 +60,15 @@ public class DialogoModificarMain extends DialogFragment implements IdialogoModi
                 .setPositiveButton("MODIFICAR",
                         (dialog, which) -> {
 
+
                             producto.setDescripcion(descripcionMain.getText().toString());
                             producto.setPrecio(precioMain.getText().toString());
                             producto.setDisponible(Boolean.parseBoolean(disponibleMain.getText().toString()));
 
+                            producto.setTipoProducto(tipoProductoMain.toString());
+
+
                             productoDAO = new ProductoDAO(context);
-                            productoDAO.modificar(producto);
 
                             Toast.makeText(context, "Se a modificado el Producto " + producto.getCodigo(), Toast.LENGTH_SHORT).show();
 

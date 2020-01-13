@@ -11,7 +11,7 @@ public class Tabla_ProductoXSede {
 
     public static final String CREAR_TABLA_PRODUCTOXSEDE="CREATE TABLE "+ TABLA_PRODUCTOXSEDE+" ("+CAMPO_CODIGOPRODUCTO+" INTEGER primary key , "+CAMPO_CODIGOSEDE+" TEXT, "+CAMPO_ACTIVO+" BOOLEAN)";
 
-    public static final String n =  ("SELECT sede.codigoSede, producto.coodigo as descripcion FROM sede INNER JOIN producto ON producto.codigo = sede.codigoSede");
+    public static final String n =  ("SELECT sede.codigoSede, articulos.coodigo as descripcion FROM sede INNER JOIN articulos ON articulos.codigo = sede.codigoSede");
 
 
 }

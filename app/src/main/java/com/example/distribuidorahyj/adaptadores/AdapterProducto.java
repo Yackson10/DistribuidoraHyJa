@@ -6,18 +6,21 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.distribuidorahyj.R;
 import com.example.distribuidorahyj.dao.ProductoDAO;
 import com.example.distribuidorahyj.domain.Producto;
+
 import java.util.ArrayList;
 
-public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHolderDatos>{
+public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHolderDatos> {
 
     public ArrayList<Producto> listDatos;
     private onItemClick mClickListener;
     private onItemClicks nClickListener;
-   //private  onItemClicka aClickListener;
+    // private  onItemClicka aClickListener;
     ProductoDAO eliProducto;
     ProductoDAO modiProducto;
 
@@ -28,14 +31,13 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     }
 
     @Override
-    public AdapterProducto.ViewHolderDatos onCreateViewHolder(ViewGroup viewGroup , int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list,viewGroup,false);
+    public AdapterProducto.ViewHolderDatos onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list, viewGroup, false);
         return new ViewHolderDatos(view);
-
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderDatos viewHolderDatos, int i){
+    public void onBindViewHolder(ViewHolderDatos viewHolderDatos, int i) {
         Producto producto = listDatos.get(i);
 
         viewHolderDatos.codigo.setText(String.valueOf(producto.getCodigo()));
@@ -44,18 +46,28 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
         viewHolderDatos.disponible.setText(String.valueOf(producto.isDisponible()));
         viewHolderDatos.tipoProducto.setText(producto.getTipoProducto());
 
-        if(producto.getTipoProducto().equals("Carnes")){
-            viewHolderDatos.imagen.setImageResource(R.drawable.carnes);
-        }else if(producto.getTipoProducto().equals("Lateos")){
-            viewHolderDatos.imagen.setImageResource(R.drawable.lateos);
-         }else if(producto.getTipoProducto().equals("Liquidos")){
-            viewHolderDatos.imagen.setImageResource(R.drawable.liquido);
-        }else {
-            viewHolderDatos.imagen.setImageResource(R.drawable.hielo);
+
+        try {
+            switch (producto.getTipoProducto()){
+                case "Carnes":
+                    viewHolderDatos.imagen.setImageResource(R.drawable.carnes);
+                    break;
+                case "Lateos":
+                    viewHolderDatos.imagen.setImageResource(R.drawable.lateos);
+                    break;
+                case "Liquidos":
+                    viewHolderDatos.imagen.setImageResource(R.drawable.liquido);
+                    break;
+                default:
+                    viewHolderDatos.imagen.setImageResource(R.drawable.hielo);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        viewHolderDatos.asignarEventos(producto,viewHolderDatos.getAdapterPosition());
-        viewHolderDatos.asignarEvento(producto,viewHolderDatos.getAdapterPosition());
+        viewHolderDatos.asignarEventos(producto, viewHolderDatos.getAdapterPosition());
+        viewHolderDatos.asignarEvento(producto, viewHolderDatos.getAdapterPosition());
         //viewHolderDatos.agregarEventoProducto(producto,viewHolderDatos.getAdapterPosition());
 
     }
@@ -66,7 +78,7 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     }
 
 
-    public class ViewHolderDatos extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolderDatos extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView codigo;
         TextView descripcion;
@@ -82,37 +94,38 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
 
         ViewHolderDatos(View itemView) {
             super(itemView);
-            codigo=(TextView)itemView.findViewById(R.id.txtVcod);
-            descripcion=(TextView)itemView.findViewById(R.id.txtVdes);
-            precio=(TextView)itemView.findViewById(R.id.txtVpre);
-            disponible=(TextView)itemView.findViewById(R.id.txtVdispo);
-            tipoProducto= (TextView)itemView.findViewById(R.id.txtVtipoProducto);
+            codigo = (TextView) itemView.findViewById(R.id.txtVcod);
+            descripcion = (TextView) itemView.findViewById(R.id.txtVdes);
+            precio = (TextView) itemView.findViewById(R.id.txtVpre);
 
-            imagen = (ImageView)itemView.findViewById(R.id.imagen);
+            disponible = (TextView) itemView.findViewById(R.id.txtVdispo);
+            tipoProducto = (TextView) itemView.findViewById(R.id.txtVtipoProducto);
+
+            imagen = (ImageView) itemView.findViewById(R.id.imagen);
 
             //agregar = (ImageButton)itemView.findViewById(R.id.iconAgregar);
-            eliminar = (ImageButton)itemView.findViewById(R.id.imageliminar);
-            modificar = (ImageButton)itemView.findViewById(R.id.imageModificar);
+            eliminar = (ImageButton) itemView.findViewById(R.id.imageliminar);
+            modificar = (ImageButton) itemView.findViewById(R.id.imageModificar);
             codigo.setOnClickListener(this);
         }
 
-        private void asignarEventos(final Producto producto, final int pos){
+        private void asignarEventos(final Producto producto, final int pos) {
             eliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mClickListener != null) {
-                        mClickListener.itemclick(v,producto);
+                        mClickListener.itemclick(v, producto);
                     }
                 }
             });
         }
 
-        private void asignarEvento(final Producto producto, final int pos){
+        private void asignarEvento(final Producto producto, final int pos) {
             modificar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (nClickListener != null) {
-                        nClickListener.itemclicks(v,producto,pos);
+                        nClickListener.itemclicks(v, producto, pos);
                     }
                 }
             });
@@ -134,24 +147,21 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
         }
     }
 
-    public interface onItemClick{
+    public interface onItemClick {
         void itemclick(View view, Producto producto);
     }
 
     public void setClickListener(onItemClick itemClickListener) {
-       this.mClickListener = itemClickListener;
+        this.mClickListener = itemClickListener;
     }
 
-     public interface onItemClicks{
-        void itemclicks(View view, Producto position,int pos);
-     }
+    public interface onItemClicks {
+        void itemclicks(View view, Producto position, int pos);
+    }
 
-     public void setClickListeners(onItemClicks itemClicksListeners){
+    public void setClickListeners(onItemClicks itemClicksListeners) {
         this.nClickListener = itemClicksListeners;
-     }
-
-
-
+    }
 
 
     /*public interface onItemClicka {

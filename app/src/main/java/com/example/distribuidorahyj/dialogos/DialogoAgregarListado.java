@@ -3,6 +3,9 @@ package com.example.distribuidorahyj.dialogos;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -15,17 +18,21 @@ import com.example.distribuidorahyj.domain.Producto;
 
 public class DialogoAgregarListado extends DialogFragment {
 
+    EditText codigo, descripcion, precio, disponible, tipoProducto;
     Context context;
     MainActivity mainActivity;
     AdapterProducto adapter;
-    Producto product = new Producto();
+    Producto producto = new Producto();
+    ProductoDAO productoDAO;
+    String item;
 
     public DialogoAgregarListado(Context context) {
         this.context = context;
         this.adapter = adapter;
     }
 
-    public  void DialogoAgregarProducto(Producto product){
+    public  void DialogoAgregarProducto(){
+        Producto producto = new Producto();
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -34,28 +41,31 @@ public class DialogoAgregarListado extends DialogFragment {
 
         builder.setView(view);
 
-        //descripcionMain =view.findViewById(R.id.dialogoAgregarDescripcionMain);
-        //precioMain = view.findViewById(R.id.dialogoAgregarPrecioMain);
+        codigo = view.findViewById(R.id.codigoLis);
+        descripcion = view.findViewById(R.id.descripcionLis);
+        precio = view.findViewById(R.id.precioLis);
+        //boolean dispo = ((Switch) view.findViewById(R.id.switch1Lis)).isChecked();
+        //tipoProducto = view.findViewById(R.id.idSpinnerLis);
 
-        //descripcionMain.setText(producto.getDescripcion());
-        //precioMain.setText(String.valueOf(producto.getPrecio()));
+
+
 
         builder.setTitle("Agregar Nuevo Producto ")
 
                 .setPositiveButton("Agregar",
                         (dialog, which) -> {
 
-                            //producto.setDescripcion(descripcionMain.getText().toString());
-                            //producto.setPrecio(precioMain.getText().toString());
+                    producto.setCodigo(Integer.parseInt(codigo.getText().toString()));
+                    producto.setDescripcion(descripcion.getText().toString());
+                    producto.setPrecio(precio.getText().toString());
+                    //producto.setDisponible(Boolean.getBoolean(disponible.getText().toString()));
+                    //producto.setTipoProducto(tipoProducto.getText().toString());
 
-                            //mainActivity.agregar(view);
-                            //productoDAO = new ProductoDAO(context);
-                            //productoDAO.Registrar(product);
 
-                            //adapter.listDatos.set(producto,pos);
-                            //adapter.notifyItemChanged(producto, );
+                            productoDAO = new ProductoDAO(context);
+                            productoDAO.Registrar(producto);
 
-                            Toast.makeText(context, "Se ha registrado el producto" + product.getCodigo(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Se ha registrado el producto", Toast.LENGTH_SHORT).show();
 
                         })
                 .setNegativeButton("CANCELAR",
