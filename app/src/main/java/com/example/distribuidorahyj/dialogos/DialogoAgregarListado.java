@@ -31,8 +31,8 @@ public class DialogoAgregarListado extends DialogFragment {
         this.adapter = adapter;
     }
 
-    public  void DialogoAgregarProducto(){
-        Producto producto = new Producto();
+    public  void DialogoAgregarProducto(Producto producto, int pos){
+        Producto productos = new Producto();
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -65,6 +65,11 @@ public class DialogoAgregarListado extends DialogFragment {
                             productoDAO = new ProductoDAO(context);
                             productoDAO.Registrar(producto);
 
+
+                           // adapter.listDatos.set(pos, producto);
+                           // adapter.notifyItemInserted(pos);
+
+
                             Toast.makeText(context, "Se ha registrado el producto", Toast.LENGTH_SHORT).show();
 
                         })
@@ -73,4 +78,5 @@ public class DialogoAgregarListado extends DialogFragment {
 
         builder.show();
     }
+
 }

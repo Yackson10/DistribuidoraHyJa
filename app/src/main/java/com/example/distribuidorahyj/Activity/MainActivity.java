@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnIngreseSede.setOnClickListener(v -> {
             DialogoSedesPorProducto dialogoSedesPorProducto = new DialogoSedesPorProducto(MainActivity.this);
-            dialogoSedesPorProducto.DialogoSedes(producto);
+            dialogoSedesPorProducto.DialogoSedes(v);
         });
 
         modificar.setOnClickListener(new View.OnClickListener() {

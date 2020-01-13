@@ -20,7 +20,7 @@ public class AdapterProducto extends RecyclerView.Adapter<AdapterProducto.ViewHo
     public ArrayList<Producto> listDatos;
     private onItemClick mClickListener;
     private onItemClicks nClickListener;
-    // private  onItemClicka aClickListener;
+    //private  onItemClicka aClickListener;
     ProductoDAO eliProducto;
     ProductoDAO modiProducto;
 

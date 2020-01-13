@@ -54,7 +54,7 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
 
         agregar.setOnClickListener(v -> {
             DialogoAgregarListado dialogoAgregarListado= new DialogoAgregarListado(context);
-            dialogoAgregarListado.DialogoAgregarProducto();
+            dialogoAgregarListado.DialogoAgregarProducto(producto, 0);
 
         });
     }
@@ -72,7 +72,7 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
 
         Cursor fila = oConexion.rawQuery
 
-                ("select codigo,descripcion,precio,disponible,tipoProducto from articulos", null);
+                ("select * from articulos", null);
 
         for (fila.moveToFirst(); !fila.isAfterLast(); fila.moveToNext()) {
 
@@ -80,7 +80,7 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
             producto.setCodigo(Integer.parseInt(fila.getString(0)));
             producto.setDescripcion(fila.getString(1));
             producto.setPrecio(fila.getString(2));
-            producto.setDisponible(Boolean.parseBoolean(fila.getString(3)));
+            producto.setDisponible(fila.getInt(3) > 0);
             producto.setTipoProducto(fila.getString(4));
             listArticulos.add(producto);
         }
@@ -142,9 +142,11 @@ public class ListActivity extends AppCompatActivity implements AdapterProducto.o
         startActivity(regresar);
     }
 
+
+
     /*@Override
     public void itemclicka(final View view, final Producto producto, int pos) {
-        DialogoAgregarListado dialogoAgregarListado = new DialogoAgregarListado(context, adapter);
+        DialogoAgregarListado dialogoAgregarListado = new DialogoAgregarListado();
         dialogoAgregarListado.DialogoAgregarProducto(producto, pos);
     }*/
 
